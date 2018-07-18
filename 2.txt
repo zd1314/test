@@ -1,0 +1,56 @@
+http://up.qq.com/act/a20170301pre/index.html#
+
+
+https://ant.design/docs/spec/visual
+
+
+
+https://antv.alipay.com/zh-cn/g2/3.x/index.html
+
+
+https://antv.alipay.com/zh-cn/f2/3.x/index.html
+
+https://antv.alipay.com/zh-cn/g6/1.x/index.html
+
+
+链接: https://pan.baidu.com/s/1h7egt1Jp9QFz_GUWv280WQ 密码: r3qe
+
+
+http://www.zcool.com.cn/work/ZMjU2NTYwODA=.html
+
+
+https://www.jb51.net/article/112416.htm-------------------------------------------444444444444444444444
+
+
+http://202.106.10.250:8014/visus/#/system-status===============================炫酷的效果
+https://blog.csdn.net/binginsist/article/details/65630547======================================vue2.0
+
+https://blog.csdn.net/selina_chan/article/details/51260516-------------------------d3树图
+
+/**/http://192.168.16.209:9096/ntp/detailsjump/list 南通公安
+
+D3  
+http://blog.mn886.net/chenjianhua/show/773c07b3abce/index.html
+https://github.com/xswei/SVG_Essentials
+https://bl.ocks.org/mbostock
+http://blockbuilder.org/search#d3version=v4
+
+
+
+
+
+layui框架不错
+
+//随机取色的三种方法：
+ function bg1(){
+             return '#'+Math.floor(Math.random()*256).toString(10);
+         }
+         function bg2(){
+             return '#'+Math.floor(Math.random()*0xffffff).toString(16);
+         }
+         function bg3(){
+             var r=Math.floor(Math.random()*256);
+             var g=Math.floor(Math.random()*256);
+             var b=Math.floor(Math.random()*256);
+             return "rgb("+r+','+g+','+b+")";//所有方法的拼接都可以用ES6新特性`其他字符串{$变量名}`替换
+         }

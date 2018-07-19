@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.btn-wrap{
+			width: 50px;
+			height: 27px;
+			background: #00676b;
+			border-radius: 15px;
+			position: relative;
+		}
+		.btn-item{
+			width: 22px;
+			height: 22px;
+			border-radius: 100%;
+			background: aqua;
+			position: absolute;
+			left:0px;
+			top:1px;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<div class="btn-wrap">
+			<div class="btn-item"></div>
+		</div>
+	</div>
+	<script>
+	    let btnWrap=document.querySelector('.btn-wrap')
+		let btn=document.querySelector('.btn-item');
+		btn.onclick=function(){
+			this.style.left=27+'px'
+		}
+	</script>
+</body>
+</html>

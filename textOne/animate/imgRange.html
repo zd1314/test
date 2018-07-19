@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 500px;
+            height: 326px;
+            background-color: pink;
+            margin: 100px auto;
+            overflow: hidden;
+            border: 3px solid red;
+            position: relative;
+        }
+
+        .box ul {
+            width: 400%;
+            height: 200px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .box ul li {
+            list-style: none;
+            float: left;
+        }
+
+        .box ul li img {
+            vertical-align: middle;
+        }
+
+        .prev {
+            width: 50px;
+            height: 50px;
+            background: rgba(13, 255, 244, 0.5);
+            position: absolute;
+            left: 0px;
+            top: 123px;
+            text-align: center;
+            opacity: 0
+        }
+
+        .next {
+            width: 50px;
+            height: 50px;
+            background: rgba(13, 255, 244, 0.5);
+            position: absolute;
+            right: 0px;
+            top: 123px;
+            text-align: center;
+            opacity: 0
+        }
+
+        .prev:hover {
+            opacity: 1
+        }
+
+        .next:hover {
+            opacity: 1
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box" id="myscroll">
+        <ul>
+            <li>
+                <img src="img/1.jpg" alt="" />
+            </li>
+            <li>
+                <img src="img/2.jpg" alt="" />
+            </li>
+            <li>
+                <img src="img/3.jpg" alt="" />
+            </li>
+            <li>
+                <img src="img/4.jpg" alt="" />
+            </li>
+            <li>
+                <img src="img/1.jpg" alt="" />
+            </li>
+            <li>
+                <img src="img/2.jpg" alt="" />
+            </li>
+        </ul>
+        <div class="prev">向左</div>
+        <div class='next'>向右</div>
+    </div>
+</body>
+
+</html>
+<script>
+    let myscroll = document.getElementById("myscroll");
+    let myscroll_ul = myscroll.children[0];
+    let prev = document.querySelector('.prev');
+    console.log(prev)
+    let next = document.querySelector('.next')
+    let num = 0; //控制左侧值 left
+    let timer = null;//定时器
+    timer = setInterval(autoPlay, 10);
+    function autoPlay() {
+        num--;
+        num <= -1200 ? num = 0 : num;
+        myscroll_ul.style.left = num + "px";
+
+    }
+    myscroll.onmouseover = function () {
+        clearInterval(timer);//鼠标经过大盒子 停止定时器timer
+    }
+    myscroll.onmouseout = function () {
+        timer = setInterval(autoPlay, 10); //开启定时器 名字还是叫timer
+    }
+    prev.onclick = function () {
+        num++;
+        myscroll_ul.style.left = 500 + "px";
+    }
+
+</script>

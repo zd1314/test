@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Document</title>
+	<style>
+		li {
+			width: 30px;
+			height: 30px;
+			border-radius: 50px;
+			background: red;
+			margin-top: 10px;
+		}
+
+		@keyframes name {
+			0% {
+				transform: scale(1);
+			}
+			50% {
+				transform: scale(1.5)
+			}
+			100% {
+				transform: scale(1)
+			}
+		}
+
+		.move {
+			animation: name 3s linear forwards;
+		}
+	</style>
+</head>
+
+<body>
+	<ul>
+		<li class='move'></li>
+		<li></li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+	<script>
+		function hasClass(elements, cName) {
+			return !!elements.className.match(new RegExp("(\\s|^)" + cName + "(\\s|$)"));
+		};
+
+		function addClass(elements, cName) {
+			if (!hasClass(elements, cName)) {
+				elements.className += " " + cName;
+			};
+		};
+
+		function removeClass(elements, cName) {
+			if (hasClass(elements, cName)) {
+				elements.className = elements.className.replace(new RegExp("(\\s|^)" + cName + "(\\s|$)"), " ");
+			};
+		};
+		let lis = document.getElementsByTagName('li');
+
+		function aaa() {
+			for (let i = 0; i < lis.length; i++) {
+				removeClass(lis[i], "move");
+				(function (a) {
+					setTimeout(() => {
+						lis[a].className = 'move';
+					}, 500 + a * 2000)
+				})(i);
+
+			};
+		};
+		aaa();
+		clearInterval(bbb);
+		let bbb = setInterval(() => {
+			aaa();
+		}, 12000)
+
+//			clearInterval(bbb);
+
+	</script>
+</body>
+
+</html>

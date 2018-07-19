@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title></title>
+</head>
+
+<body>
+  <canvas id="particles"></canvas>
+  <script type="text/javascript" src="particle-main.js"></script>
+  <script>
+    let canvas, ctx;
+    canvas = document.getElementById("particles");
+    ctx = canvas.getContext("2d");
+    canvas.width = 230;
+    canvas.height = 230;
+    let dots = [];
+    let Dividingline = 110;
+    function init() {
+      xiezi();
+      let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let y = 0; y < imgData.height; y += 3) {//y+=3，是因为如果按像素取，有效值非常多，所以这里就每隔3像素取一点
+        for (let x = 0; x < imgData.width; x += 3) {//y是高，x是宽
+          let i = (x + y * imgData.width) * 4;//这边就从左往右，从上往下；500X300的大小，会取166×100个像素点；×4则是因为rgba()
+          let dot = {
+            x: 0,
+            y: 0
+          };
+          if (imgData.data[i + 3] >= 228) {//因为img.data中包含了每个像素点的rgba，＋3表示取a的值
+            dot.x = x;
+            dot.y = y;
+            dots.push(dot);//将每个满足条件的xy Add到dots数组中
+          }
+        }
+        fengexian();
+        //run();
+      }
+    }
+
+    function xiezi() {
+      ctx.beginPath();
+      ctx.font = "50px Comic Sans MS";
+      ctx.fillText("SoDiSnI", 20, 100);
+      ctx.fill();
+    }
+    function drawparticles() {
+      for (let i = 0; i < dots.length; i++) {
+        let particle = dots[i];
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, 1, 0, Math.PI * 2, true);
+        ctx.fill();
+      }
+    }
+    function fengexian() {
+      ctx.beginPath();
+      ctx.moveTo(Dividingline, 0);
+      ctx.lineTo(Dividingline, 230);
+      ctx.stroke();
+    }
+    let hudu = 0;
+    function run() {//主要利用弧度的特性,截取圆周运动的x坐标,可以理解为按圆周运动,但是y坐标不变,
+      //相对应的在平面上看起来,快到端点的时候运动慢,在中线附近就较快
+      if (hudu < 360) {
+        for (let i = 0; i < dots.length; i++) {
+          let particle = dots[i];
+          let newx = Math.cos(hudu) * (Dividingline - particle.x) + Dividingline;
+          ctx.beginPath();
+          ctx.arc(newx, particle.y, 1, 0, Math.PI * 2, true);
+          ctx.fill();
+        }
+        hudu += 0.1;//细化弧度,可以保证横坐标运动的间距小
+      }
+      else {
+        hudu = 0;
+      }
+    }
+    function clean() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+    setInterval(function () {
+      clean();
+      run();
+    }, 50);
+
+    init();
+  </script>
+</body>
+
+</html>

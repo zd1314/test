@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	*{
+		margin:0;
+		padding: 0
+	}
+		.wrap{
+			display:flex;
+		}
+		.left{
+			width: 200px;
+			min-width: 200px;
+			max-width: 200px;
+			height: auto;
+			background: red;
+			flex-grow: 0
+		}
+		.center{
+			width: auto;
+			height: 200px;
+			flex-grow: 1;
+			background: blue
+		}
+		.right{
+			width: 200px;
+			min-width: 200px;
+			max-width: 200px;
+			height: auto;
+			background: pink;
+			
+		}
+		#demo{
+			width: 50px;
+			height: 100px;
+			background:blue;
+			position: absolute;
+			left:0;
+			top:300px;
+			text-align: center;
+			line-height: 100px;
+			z-index: 10
+		}
+		ul{
+			list-style: none;
+			display: flex;
+			flex-direction:column;
+			justify-content: center;
+			align-items: center;
+			width: 100px;
+			height: 300px;
+			border:1px solid #ccc;
+			position: absolute;
+			left: -100px;
+			z-index: 2;
+			
+		}
+		li{
+			flex:1;
+			margin-top: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div class='wrap'>
+		<div class="left"></div>
+		<div class="center"></div>
+		<div class="right"></div>
+	</div>
+	<div id="demo">
+		列表
+	</div>
+	<ul class="oul">
+		<li><span>列表1</span></li>
+		<li><span>列表1</span></li>
+		<li><span>列表1</span></li>
+		<li><span>列表1</span></li>
+	</ul>
+	<script>
+		demo=document.getElementById('demo')
+		ul=document.querySelector('.oul')
+
+		demo.onmouseover=function(){
+			
+			ul.style.left=0+'px'
+		}
+		demo.onmouseout=function(){
+			
+			ul.style.left=-100+'px'
+			
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <canvas id='wrap'></canvas>
+  <script>
+
+    function ArrData(dom) {
+      this.dom = document.getElementById('wrap')
+    }
+    ArrData.prototype = {
+      init: function () {
+        this.width = 200;
+        this.height = 200;
+      },
+      create: function () {
+        this.dom.style.width = this.width + 'px';
+        this.dom.style.height = this.height + 'px';
+        let ctx = this.dom.getContext('2d');
+        ctx.moveTo(0, 0);
+        ctx.lineTo(300, 0);
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = 'blue';
+        ctx.stroke()
+        ctx.moveTo(150, 0)
+        ctx.lineTo(150, 30)
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = 'blue';
+        ctx.stroke()
+
+        // ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // ctx.fillStyle = '#000'; // 设置颜色
+        // ctx.fillRect(10, 10, 200, 200); // 把(10,10)位置大小为130x130的矩形涂色
+        // 利用Path绘制复杂路径:
+        let path = new Path2D();
+        path.arc(150, 85, 50, 0, Math.PI * 2, true);
+        path.moveTo(185, 75);
+        path.arc(150, 75, 35, 0, Math.PI, false);
+        path.moveTo(130, 75);
+        path.arc(130, 70, 5, 0, Math.PI * 2, true);
+        path.moveTo(170, 75);
+        path.arc(170, 70, 5, 0, Math.PI * 2, true);
+        ctx.strokeStyle = 'yellow';
+        ctx.stroke(path);
+      }
+    }
+    let aa = new ArrData()
+    aa.init()
+    aa.create()
+
+    // let obj = {
+    //   a: 1,
+    //   b: 2,
+    //   c: () => {
+    //     console.log(this)
+    //   }
+    // }
+    // obj.c()
+  </script>
+</body>
+
+</html>

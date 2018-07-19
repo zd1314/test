@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  </style>
+</head>
+
+<body>
+
+  <canvas id='wrap'></canvas>
+  <script>
+    function Canvas(demo) {
+      this.wrap = document.getElementById('wrap')
+      this.init()
+    }
+    Canvas.prototype = {
+      init: function () {
+        this.width = 500;
+        this.height = 500;
+        this.wrap.width = this.width;
+        this.wrap.height = this.height;
+        this.conText = this.wrap.getContext('2d');
+      },
+      draw: function () {
+        this.conText.beginPath()
+        this.conText.arc(210, 210, 200, 0, 2 * Math.PI);
+        this.conText.stroke();
+        this.conText.closePath()
+        /*大黑圆*/
+        this.conText.beginPath()
+        this.conText.arc(210, 210, 200, 0.5 * Math.PI, 1.5 * Math.PI)
+        this.conText.fill()
+        this.conText.closePath()
+        /*右边白色半圆*/
+        this.conText.beginPath()
+        this.conText.arc(210, 110, 100, 0.5 * Math.PI, 1.5 * Math.PI)
+        this.conText.fillStyle = 'white'
+        this.conText.fill()
+        this.conText.closePath()
+        /*小黑圆*/
+        this.conText.beginPath();
+        this.conText.arc(210, 110, 33, 0, 2 * Math.PI);
+        this.conText.fillStyle = 'black'
+        this.conText.fill();
+        this.conText.closePath();
+
+        this.conText.beginPath();
+        this.conText.arc(210, 310, 100, Math.PI, (1.5 * Math.PI), true);
+        this.conText.fill();
+        this.conText.closePath();
+        /*小白圆*/
+        this.conText.beginPath();
+        this.conText.arc(210, 310, 33, 0, 2 * Math.PI);
+        this.conText.fillStyle = 'white'
+        this.conText.fill();
+        this.conText.closePath();
+      }
+    }
+    setInterval(function () {
+
+    })
+    let wrapBox = new Canvas()
+    wrapBox.draw()
+
+
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body {
+      background: radial-gradient(200% 100% at bottom center, #f7f7b6, #e96f92, #75517d, #1b2947);
+      background: radial-gradient(220% 105% at top center, #1b2947 10%, #75517d 40%, #e96f92 65%, #f7f7b6);
+      background-attachment: fixed;
+      overflow: hidden;
+    }
+
+    @keyframes rotate {
+      0% {
+        transform: perspective(400px) rotateZ(20deg) rotateX(-40deg) rotateY(0);
+      }
+      100% {
+        transform: perspective(400px) rotateZ(20deg) rotateX(-40deg) rotateY(-360deg);
+      }
+    }
+
+    .stars {
+      transform: perspective(500px);
+      transform-style: preserve-3d;
+      position: absolute;
+      bottom: 0;
+      perspective-origin: 50% 100%;
+      left: 50%;
+      animation: rotate 90s infinite linear;
+    }
+
+    .star {
+      width: 2px;
+      height: 2px;
+      background: #F7F7B6;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform-origin: 0 0 -300px;
+      transform: translate3d(0, 0, -300px);
+      backface-visibility: hidden;
+    }
+
+    .masked {
+      font-size: 80px;
+      background-image: -webkit-linear-gradient(left, #fede, #e96f92 25%, yellow 50%, #f7f7b6 75%, lightgreen);
+      -webkit-text-fill-color: transparent;
+      -webkit-background-clip: text;
+      -webkit-background-size: 200% 100%;
+      -webkit-animation: masked-animation 5s infinite linear;
+      margin-top: 20%;
+      text-align: center;
+
+    }
+
+    @keyframes masked-animation {
+      0% {
+        background-position: 0 0;
+      }
+      100% {
+        background-position: -100% 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class='masked'>
+    <h4>漫天星空</h4>
+  </div>
+  <div class="stars">
+  </div>
+  <canvas id='canvasWrap' width="300" height='300'></canvas>
+  <script src=' ../jquery-1.8.3.min.js '></script>
+  <script>
+    $(document).ready(function () {
+      let stars = 800;
+      let $stars = $('.stars ');
+      let r = 800;
+      for (let i = 0; i < stars; i++) {
+        let $star = $('<div/>').addClass('star'); $stars.append($star);
+      } $('.star').each(function () {
+        let cur = $(this); let s = 0.2 + Math.random()
+          * 1; let curR = r + Math.random() * 1000; cur.css({
+            transformOrigin: '0 0 ' + curR + 'px', transform: ' translate3d(0,0,-'
+              + curR + 'px) rotateY(' + Math.random() * 360 + 'deg) rotateX(' + Math.random() * -50 + 'deg) scale(' + s + ',' + s + ')'
+          });
+      });
+    });
+    /*canvas绘制*/
+    window.onload = function () {
+      let context = document.getElementById('canvasWrap').getContext('2d');
+      context.fillStyle = '#e96f92';
+      for (let i = 0; i < 10; i++) {
+        context.beginPath()
+        context.arc(i * 20, i * 20, i * 5, 0, Math.PI * 2, true)
+        context.strokeStyle = 'rgba(255,0,0,0.25)';
+        context.stroke()
+        context.fill()
+        setInterval(function () {
+          run(context)
+        }, 1000)
+      }
+    }
+    function run(ctx) {
+      ctx.clearRect(0, 0, 300, 300);/*清除画布*/
+      ctx.fillStyle = '#e96f92';
+      ctx.strokeStyle = 'yellow';
+      for (let i = 0; i < 10; i++) {
+        ctx.beginPath();
+        ctx.arc(i * 25, i * 25, i * 5, 0, 2 * Math.PI, false);
+        ctx.closePath();
+        ctx.stroke()
+      }
+    }
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <canvas id="d1" width="500" height="500"></canvas>
+  <script type="text/javascript">
+    let context = document.getElementById("d1").getContext("2d");
+    //大圆
+    context.beginPath();
+    context.arc(210, 210, 200, 0, 2 * Math.PI);
+    context.stroke();
+    context.closePath();
+    //左边的大黑半圆
+    context.beginPath();
+    context.arc(210, 210, 200, 0.5 * Math.PI, 1.5 * Math.PI);
+    context.fill();
+    context.closePath();
+    //上面的左边半圆
+    context.beginPath();
+    context.arc(210, 110, 100, 0.5 * Math.PI, 1.5 * Math.PI);
+    context.fillStyle = "white";
+    context.fill();
+    context.closePath();
+    //上面的小黑圆
+    context.beginPath();
+    context.arc(210, 110, 33, 0, 2 * Math.PI);
+    context.fillStyle = "black";
+    context.fill();
+    context.closePath();
+    //下面的右边半黑圆
+    context.beginPath();
+    context.arc(210, 310, 100, Math.PI, (3 / 2 * Math.PI), true);
+    context.fill();
+    context.closePath();
+    //下面的小白圆
+    context.beginPath();
+    context.arc(210, 310, 33, 0, 2 * Math.PI);
+    context.fillStyle = "white";
+    context.fill();
+    context.closePath();
+  </script>
+</body>
+
+</html>

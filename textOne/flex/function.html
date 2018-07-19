@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+
+<body>
+	<script>
+		let b = new Set([1, 2, 3]);
+		let a = new Set([1, 2])
+		// 并集
+		let union = new Set([...a, ...b]);
+		// console.log(union)
+		// 差集
+		let intersect = new Set([...b].filter(x => !a.has(x)));
+		// 交集
+		let common = new Set([...b].filter(x => a.has(x)));
+
+
+		/*求重复方法*/
+		let commomData = ((a, b) => {
+			let a = new Set(a)
+			let b = new Set(b)
+			return new Set([...b].filter(x => !a.has(x)))
+		})
+		let crr = (commomData([1, 2, 3], [1, 2, 3, 4]))
+		console.log(...crr)
+	</script>
+</body>
+
+</html>

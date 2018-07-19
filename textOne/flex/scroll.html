@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>无缝滚动轮播图</title>
+        <style type="text/css">
+           #container{
+               width:600px;
+               height:200px;
+               border:1px solid red;
+               overflow:hidden;
+           }
+           ul{
+               list-style-type:none;
+               width:600px;
+               border:1px solid green;
+               padding:0px;
+               display: flex
+           }
+
+           ul li{
+               display:inline-block;
+               width:300px;
+               height:100px;
+               background: pink;
+               margin-right: 20px
+              
+           }
+        </style>
+    </head>
+    <body>
+        <div id="container">
+            <ul id="content">
+                <li>列表一</li>
+                <li>列表二</li>
+                <li>列表3</li>
+            </ul>
+        </div>
+        <script>
+           window.onload=function(){
+                let obj=document.getElementById("content");
+                obj.style.marginLeft=0+"px"; 
+                function move(){
+                   if(parseInt(obj.style.marginLeft)<=-330){
+                       obj.style.marginLeft=0+"px";
+                   }else{
+                       obj.style.marginLeft=parseInt(obj.style.marginLeft)-1+"px";
+                   }
+                }
+                setInterval(move,25);
+           }
+        </script>
+    </body>
+</html>

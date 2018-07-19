@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0px;
+      padding: 0px;
+      border: 0px;
+    }
+
+    body {
+      font-size: 12px
+    }
+
+    #demo {
+      overflow: hidden;
+      height: 80px;
+      width: 280px;
+      margin: 90px auto;
+      position: relative;
+    }
+
+    #demo1 {
+      height: auto;
+      text-align: left;
+    }
+
+    #demo2 {
+      height: auto;
+      text-align: left;
+    }
+
+    #demo1 li {
+      list-style-type: none;
+      height: 22px;
+      text-align: left;
+      text-indent: 15px;
+    }
+
+    #demo2 li {
+      list-style-type: none;
+      height: 22px;
+      text-align: left;
+      text-indent: 15px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="demo">
+    <ul id="demo1">
+      <li>
+        <a href="javascript:void(0);" target="_blank">111111</a>
+      </li>
+      <li>
+        <a href="javascript:void(0);" target="_blank">222222</a>
+      </li>
+      <li>
+        <a href="javascript:void(0);" target="_blank">333333</a>
+      </li>
+      <li>
+        <a href="javascript:void(0);" target="_blank">444444</a>
+      </li>
+      <li>
+        <a href="javascript:void(0);" target="_blank">555555</a>
+      </li>
+      <li>
+        <a href="javascript:void(0);" target="_blank">666666</a>
+      </li>
+      <li>
+        <a href="javascript:void(0);" target="_blank">777777</a>
+      </li>
+    </ul>
+    <div id="demo2"></div>
+  </div>
+  <script>
+    let speed = 40
+    window.onload = function () {
+      let demo = document.getElementById("demo");
+      let demo2 = document.getElementById("demo2");
+      let demo1 = document.getElementById("demo1");
+      demo2.innerHTML = demo1.innerHTML
+      function Marquee() {
+        if (demo.scrollTop >= demo1.offsetHeight) {
+          demo.scrollTop = 0;
+        }
+        else {
+          demo.scrollTop = demo.scrollTop + 1;
+        }
+      }
+      let MyMar = setInterval(Marquee, speed)
+      demo.onmouseover = function () { clearInterval(MyMar) }
+      demo.onmouseout = function () { MyMar = setInterval(Marquee, speed) }
+    }
+  </script>
+</body>
+
+</html>

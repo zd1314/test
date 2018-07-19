@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>game1</title>
+    <style type="text/css">
+    .tt {
+    width: 145px;
+    height: 106px;
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-top: 10px;
+    display: block;
+    
+    }
+
+    </style>
+</head>
+<body>
+
+    <div id="colee_left" style="width: 1050px;height: 150px;border:1px solid #e8e8e8;margin-top: 10px;overflow: hidden;background-color:aqua;">
+        <table cellpadding="0">
+            <tbody>
+                <tr>
+                    <td id="colee_left1" valign="top">
+                        <table>
+                            <tbody>
+                                <tr align="center">
+                                    <td>
+                                        <a href="#">
+                                            <img class="tt" src="1.jpg"/>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="#">
+                                            <img class="tt" src="1.jpg"/>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="#">
+                                            <img class="tt" src="1.jpg"/>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="#">
+                                            <img class="tt" src="1.jpg"/>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="#">
+                                            <img class="tt" src="1.jpg"/>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="#">
+                                            <img class="tt" src="1.jpg"/>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="#">
+                                            <img class="tt" src="1.jpg"/>
+                                        </a>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td id="colee_left2" valign="top">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+<script type="text/javascript">
+    let speed = 30;
+    //速度数值越大速度越慢
+    let colee_left2 = document.getElementById("colee_left2");
+    let colee_left1 = document.getElementById("colee_left1");
+    let colee_left = document.getElementById("colee_left");
+    colee_left2.innerHTML = colee_left1.innerHTML;
+    function Marquee3() {
+            if (colee_left2.offsetWidth - colee_left.scrollLeft <= 0){//offsetWidth 是对象的可见宽度
+                    colee_left.scrollLeft -= colee_left1.offsetWidth//scrollWidth 是对象的实际内容的宽，不包边线宽度
+        }
+        else {
+            colee_left.scrollLeft++;
+        }
+
+    }
+    let MyMar3 = setInterval(Marquee3, speed);
+   
+</script>

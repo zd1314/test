@@ -1,55 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
 	<style>
-		#axis div{
-			 font: 10px sans-serif;
-			  background-color: steelblue;
-			  text-align: right;
-			  padding: 3px;
-			  margin: 1px;
-			  color: white;
+		#axis div {
+			font: 10px sans-serif;
+			background-color: steelblue;
+			text-align: right;
+			padding: 3px;
+			margin: 1px;
+			color: white;
 		}
 	</style>
 </head>
+
 <body>
 	<div id='axis'></div>
-	<script src='./d3.min.js'></script>
+	<script src='./d3.v4.min.js'></script>
 	<script>
-		function Con(){
-			this.cont=document.getElementById('axis')
+		function Con() {
+			this.cont = document.getElementById('axis')
 			this.init()
 		}
-		Con.prototype={
-			init:function(){
-				this.data=[40,67,70,38];
-				this.color=['#0285fb','#11cbf6','#04f28c','#ffee2e']
+		Con.prototype = {
+			init: function () {
+				this.data = [40, 67, 70, 38];
+				this.color = ['#0285fb', '#11cbf6', '#04f28c', '#ffee2e']
 			},
-			creat:function(){
-				let me=this;
-				me.x=d3.scaleLinear()
-				.domain([0,d3.max(me.data)])
-				.range([0,420])	
+			creat: function () {
+				let me = this;
+				me.x = d3.scaleLinear()
+					.domain([0, d3.max(me.data)])
+					.range([0, 420])
 				d3.select(me.cont)
-				.selectAll('div')
-				.data(me.data)
-				.enter()
-				.append('div')
-				.style('width',function(d){
-					return me.x(d)+'px'
-				})
-				.style('background-color',function(d,i){
-					return me.color[i]
-				})
-				.text(function(d){
-					return d
-				})
+					.selectAll('div')
+					.data(me.data)
+					.enter()
+					.append('div')
+					.style('width', function (d) {
+						return me.x(d) + 'px'
+					})
+					.style('background-color', function (d, i) {
+						return me.color[i]
+					})
+					.text(function (d) {
+						return d
+					})
 			}
 		}
-		let aa=new Con()
+		let aa = new Con()
 		aa.creat()
 	</script>
 </body>
+
 </html>

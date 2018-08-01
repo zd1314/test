@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .box1 {
+      width: 400px;
+      height: 200px;
+      position: absolute;
+      left:200px;
+      top: 200px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+    .box1 img {
+      width: 100%;
+      height: 100%;
+
+      transition: all 0.5s;
+      -webkit-transition: all 0.5s;
+
+      transform-origin: center bottom;
+      -ms-transform-origin: center bottom;
+      -webkit-transform-origin:center bottom;
+
+    }
+    .box1:hover img {
+      transform: scale(1.5);
+      -ms-transform:scale(1.5); 	/* IE 9 */
+      -moz-transform:scale(1.5); 	/* Firefox */
+      -webkit-transform:scale(1.5); /* Safari 和 Chrome */
+      -o-transform:scale(1.5); 	/* Opera */
+    }
+  </style>
+</head>
+<body>
+  <div class="box1">
+    <img src="./img/view1.jpg" alt="">
+  </div>
+</body>
+</html>

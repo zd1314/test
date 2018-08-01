@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .water-polo {
+      overflow: hidden;
+      border-radius: 50%;
+      position: absolute;
+      left: 200px;
+      top: 400px;
+      width: 200px;
+      height: 200px;
+      border: 1px solid #00c6ff;
+    }
+    .polo-bg1 {
+      width: 400px;
+      height: 100px;
+      background: url("./img/bg1.png") no-repeat center center;
+      background-size: 400px 100px;
+      position: absolute;
+      right: -20px;
+      bottom: 0;
+      animation: PoloMove2 2.5s linear infinite;
+    }
+    .polo-bg2 {
+      width: 400px;
+      height: 100px;
+      background: url("./img/bg2.png") no-repeat center center;
+      background-size: 400px 100px;
+      position: absolute;
+      right: 0;
+      bottom: 0px;
+      animation: PoloMove1 1.5s linear infinite;
+    }
+    .water-polo .value {
+      width: 100%;
+      color: #000;
+      font-size: 30px;
+      position: absolute;
+      top: 50%;
+      height: 0.3rem;
+      line-height: 0.3rem;
+      margin-top: -0.15rem;
+      text-align: center;
+    }
+    @keyframes PoloMove1 {
+      0% {
+        right: 0;
+      }
+      100% {
+        right: -140px;
+      }
+    }
+    @keyframes PoloMove2 {
+      0% {
+        right: -20px;
+      }
+      100% {
+        right: -175px;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <div class='water-polo'>
+    <div class='polo-bg1'></div>
+    <div class='polo-bg2'></div>
+    <span class='value'>50%</span>
+  </div>
+</body>
+</html>

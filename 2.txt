@@ -64,3 +64,19 @@ layui��ܲ���
 
 react  ���İ�
 http://react.css88.com/docs/getting-started.html
+
+
+递归函数
+function flattenArray(arr) {
+
+            const flattened = [].concat(...arr);
+
+            return flattened.some(item => Array.isArray(item)) ?
+
+                flattenArray(flattened) : flattened;
+        }
+
+        const arr = [11, [22, [44, 66], 33], [44, [55, 66, [77, [88]], 99]]];
+        // console.log(...arr)
+        const flatArr = flattenArray(arr);
+        console.log(flatArr)

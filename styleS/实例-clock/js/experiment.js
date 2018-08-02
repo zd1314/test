@@ -1,10 +1,10 @@
 $(function(){
 
-    var props = 'transform WebkitTransform MozTransform OTransform msTransform'.split(' '),
+    let props = 'transform WebkitTransform MozTransform OTransform msTransform'.split(' '),
         prop,
         el = document.createElement('div');
 
-    for(var i = 0, l = props.length; i < l; i++) {
+    for(let i = 0, l = props.length; i < l; i++) {
         if(typeof el.style[props[i]] !== "undefined") {
             prop = props[i];
             break;
@@ -22,7 +22,7 @@ $(function(){
     }
 
     function startClock() {
-        var angle = 360/60,
+        let angle = 360/60,
             date = new Date(),
             hour = date.getHours() % 12,
             minute = date.getMinutes(),

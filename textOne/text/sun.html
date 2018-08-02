@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: black;
+      overflow: hidden;
+    }
+
+    .wrap {
+      width: 40em;
+      height: 40em;
+      position: relative;
+      font-size: 10px
+    }
+
+    .sun {
+      width: 10em;
+      height: 10em;
+      border-radius: 50%;
+      position: absolute;
+      left: 15em;
+      top: 15em;
+      background: yellow;
+      box-shadow: 0 0 3em #fff
+    }
+
+    .earth,
+    .moon {
+      position: absolute;
+      border-style: solid;
+      border-color: #fff transparent transparent transparent;
+      border-width: 0.1em 0.1em 0 0;
+      border-radius: 50%
+    }
+
+    .earth {
+      left: 5em;
+      top: 7em;
+      width: 30em;
+      height: 30em;
+      animation: move 3.7s linear infinite;
+    }
+
+    .moon {
+      width: 8em;
+      height: 8em;
+      left: 21em;
+      top: 0;
+      animation: move 2.7s linear infinite;
+    }
+
+    .earth::before,
+    .moon::before {
+      content: '';
+      border-radius: 50%;
+      position: absolute
+    }
+
+    .earth::before {
+      width: 3em;
+      height: 3em;
+      background: aqua;
+      top: 2.5em;
+      right: 2.5em;
+    }
+
+    .moon::before {
+      width: 1.2em;
+      height: 1.2em;
+      background: silver;
+      top: 0.8em;
+      right: 0.2em;
+
+    }
+
+    @keyframes move {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+
+    .box {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      border: 5px solid pink;
+      box-shadow: 0 0 13px white;
+      border-radius: 50%;
+    }
+
+    .box i {
+      display: block;
+      width: 150px;
+      height: 150px;
+      position: absolute;
+      left: -10px;
+      top: -10px;
+      border-radius: 50%;
+      border: 10px solid transparent;
+      animation: circleRoate 5s linear infinite;
+    }
+
+    .box i span {
+      position: absolute;
+      left: 130px;
+      top: 24px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: yellow;
+    }
+
+    @keyframes circleRoate {
+      from {
+        transform: rotate(0deg) infinite;
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 太阳月亮星星 -->
+  <div class="wrap">
+    <div class="sun"></div>
+    <div class="earth">
+      <div class="moon"></div>
+    </div>
+  </div>
+  <!--小圆围着大圆转 -->
+  <div class="box">
+    <i>
+      <span></span>
+    </i>
+  </div>
+</body>
+
+</html>

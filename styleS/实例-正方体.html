@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
@@ -14,26 +15,28 @@
       transform: rotateX(-90deg) rotateY(143deg);
       animation: moveLI 8s infinite ease-in-out alternate;
     }
+
     @keyframes moveLI {
-      0%{
+      0% {
         transform: rotateX(-90deg) rotateY(143deg);
       }
-      20%{
+      20% {
         transform: rotateX(0deg) rotateY(80deg);
       }
-      40%{
+      40% {
         transform: rotateX(0deg) rotateY(0deg);
       }
-      60%{
+      60% {
         transform: rotateX(90deg) rotateY(90deg);
       }
-      80%{
+      80% {
         transform: rotateX(-26deg) rotateY(-45deg);
       }
-      100%{
+      100% {
         transform: rotateX(-90deg) rotateY(143deg);
       }
     }
+
     .liFang .box1 {
       width: 100%;
       height: 100%;
@@ -41,32 +44,38 @@
       top: 0;
       left: 0;
     }
+
     .liFang>div:nth-child(1) {
-      background-color: rgba(234,179,12,0.5);
+      background-color: rgba(234, 179, 12, 0.5);
       top: -50%;
       transform: rotateX(90deg);
     }
+
     .liFang>div:nth-child(2) {
-      background-color: rgba(149,248,9,0.5);
+      background-color: rgba(149, 248, 9, 0.5);
       top: 50%;
       transform: rotateX(-90deg);
     }
+
     .liFang>div:nth-child(3) {
-      background-color: rgba(20,248,9,0.5);
+      background-color: rgba(20, 248, 9, 0.5);
       left: -50%;
       transform: rotateY(90deg);
     }
+
     .liFang>div:nth-child(4) {
-      background-color: rgba(9,248,206,0.5);
+      background-color: rgba(9, 248, 206, 0.5);
       left: 50%;
       transform: rotateY(-90deg);
     }
+
     .liFang>div:nth-child(5) {
-      background-color: rgba(9,166,248,0.5);
+      background-color: rgba(9, 166, 248, 0.5);
       transform: translateZ(125px);
     }
+
     .liFang>div:nth-child(6) {
-      background-color: rgba(248,9,37,0.5);
+      background-color: rgba(248, 9, 37, 0.5);
       transform: translateZ(-125px);
     }
 
@@ -78,9 +87,10 @@
       left: 50%;
       margin-top: -60px;
       margin-left: -60px;
-      transform-style:preserve-3d;
+      transform-style: preserve-3d;
       transform: rotateX(-54deg) rotateY(-43deg);
     }
+
     .liFangX .box2 {
       width: 120px;
       height: 120px;
@@ -90,35 +100,41 @@
     }
 
     .liFangX>div:nth-child(1) {
-      top:-50%;
+      top: -50%;
       transform: rotateX(90deg);
       background-color: red;
     }
+
     .liFangX>div:nth-child(2) {
-      top:50%;
+      top: 50%;
       transform: rotateX(-90deg);
       background-color: green;
     }
+
     .liFangX>div:nth-child(3) {
-      left:-50%;
+      left: -50%;
       transform: rotateY(90deg);
       background-color: pink;
     }
+
     .liFangX>div:nth-child(4) {
-      left:50%;
+      left: 50%;
       transform: rotateY(-90deg);
       background-color: yellow;
     }
+
     .liFangX>div:nth-child(5) {
       transform: translateZ(60px);
       background-color: blue;
     }
+
     .liFangX>div:nth-child(6) {
       transform: translateZ(60px);
       background-color: #daa520;
     }
   </style>
 </head>
+
 <body>
   <div class="liFang">
     <div class="box1 top"></div>
@@ -138,4 +154,5 @@
     </div>
   </div>
 </body>
+
 </html>

@@ -13,7 +13,7 @@ https://antv.alipay.com/zh-cn/f2/3.x/index.html
 https://antv.alipay.com/zh-cn/g6/1.x/index.html
 
 
-Á´½Ó: https://pan.baidu.com/s/1h7egt1Jp9QFz_GUWv280WQ ÃÜÂë: r3qe
+ï¿½ï¿½ï¿½ï¿½: https://pan.baidu.com/s/1h7egt1Jp9QFz_GUWv280WQ ï¿½ï¿½ï¿½ï¿½: r3qe
 
 
 http://www.zcool.com.cn/work/ZMjU2NTYwODA=.html
@@ -21,13 +21,20 @@ http://www.zcool.com.cn/work/ZMjU2NTYwODA=.html
 
 https://www.jb51.net/article/112416.htm-------------------------------------------444444444444444444444
 
+css/html
 
-http://202.106.10.250:8014/visus/#/system-status===============================ìÅ¿áµÄÐ§¹û
+https://segmentfault.com/a/1190000005174755
+
+https://segmentfault.com/a/1190000005353213
+
+
+
+http://202.106.10.250:8014/visus/#/system-status===============================ï¿½Å¿ï¿½ï¿½Ð§ï¿½ï¿½
 https://blog.csdn.net/binginsist/article/details/65630547======================================vue2.0
 
-https://blog.csdn.net/selina_chan/article/details/51260516-------------------------d3Ê÷Í¼
+https://blog.csdn.net/selina_chan/article/details/51260516-------------------------d3ï¿½ï¿½Í¼
 
-/**/http://192.168.16.209:9096/ntp/detailsjump/list ÄÏÍ¨¹«°²
+/**/http://192.168.16.209:9096/ntp/detailsjump/list ï¿½ï¿½Í¨ï¿½ï¿½ï¿½ï¿½
 
 D3  
 http://blog.mn886.net/chenjianhua/show/773c07b3abce/index.html
@@ -39,9 +46,9 @@ http://blockbuilder.org/search#d3version=v4
 
 
 
-layui¿ò¼Ü²»´í
+layuiï¿½ï¿½Ü²ï¿½ï¿½ï¿½
 
-//Ëæ»úÈ¡É«µÄÈýÖÖ·½·¨£º
+//ï¿½ï¿½ï¿½È¡É«ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½
  function bg1(){
              return '#'+Math.floor(Math.random()*256).toString(10);
          }
@@ -49,8 +56,11 @@ layui¿ò¼Ü²»´í
              return '#'+Math.floor(Math.random()*0xffffff).toString(16);
          }
          function bg3(){
-             var r=Math.floor(Math.random()*256);
-             var g=Math.floor(Math.random()*256);
-             var b=Math.floor(Math.random()*256);
-             return "rgb("+r+','+g+','+b+")";//ËùÓÐ·½·¨µÄÆ´½Ó¶¼¿ÉÒÔÓÃES6ÐÂÌØÐÔ`ÆäËû×Ö·û´®{$±äÁ¿Ãû}`Ìæ»»
+             let r=Math.floor(Math.random()*256);
+             let g=Math.floor(Math.random()*256);
+             let b=Math.floor(Math.random()*256);
+             return "rgb("+r+','+g+','+b+")";//ï¿½ï¿½ï¿½Ð·ï¿½ï¿½ï¿½ï¿½ï¿½Æ´ï¿½Ó¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ES6ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½`ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½{$ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½}`ï¿½æ»»
          }
+
+react  ï¿½ï¿½ï¿½Ä°ï¿½
+http://react.css88.com/docs/getting-started.html

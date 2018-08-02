@@ -32,11 +32,11 @@
     #grid span {
       border-width: 50px;
       border-style: solid;
-      border-color: var(--color1) var(--color2) var(--color3) var(--color4);
+      border-color: let(--color1) let(--color2) let(--color3) let(--color4);
     }
 
     #grid span:first-child {
-      border-color: transparent var(--color2) var(--color3) transparent;
+      border-color: transparent let(--color2) let(--color3) transparent;
     }
 
     #grid span:not(:first-child) {
@@ -45,23 +45,23 @@
 
     @keyframes animate {
       0% {
-        border-color: var(--color1) var(--color2) var(--color3) var(--color4);
+        border-color: let(--color1) let(--color2) let(--color3) let(--color4);
       }
 
       25% {
-        border-color: var(--color4) var(--color1) var(--color2) var(--color3);
+        border-color: let(--color4) let(--color1) let(--color2) let(--color3);
       }
 
       50% {
-        border-color: var(--color3) var(--color4) var(--color1) var(--color2);
+        border-color: let(--color3) let(--color4) let(--color1) let(--color2);
       }
 
       75% {
-        border-color: var(--color2) var(--color3) var(--color4) var(--color1);
+        border-color: let(--color2) let(--color3) let(--color4) let(--color1);
       }
 
       100% {
-        border-color: var(--color1) var(--color2) var(--color3) var(--color4);
+        border-color: let(--color1) let(--color2) let(--color3) let(--color4);
       }
     }
   </style>

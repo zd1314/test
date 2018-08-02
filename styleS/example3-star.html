@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
@@ -9,6 +10,7 @@
       height: 1080px;
       background-color: #000;
     }
+
     .star1 {
       width: 300px;
       height: 200px;
@@ -16,6 +18,7 @@
       background-size: contain;
       position: absolute;
     }
+
     .star2 {
       width: 230px;
       height: 100px;
@@ -23,6 +26,7 @@
       background-size: contain;
       position: absolute;
     }
+
     .star3 {
       width: 240px;
       height: 140px;
@@ -30,6 +34,7 @@
       background-size: contain;
       position: absolute;
     }
+
     .star4 {
       width: 580px;
       height: 211px;
@@ -48,24 +53,25 @@
         transform: scale(1) rotate(0) translate3d(-1200px, 1200px, 0);
       }
     }
-
   </style>
 </head>
+
 <body>
-<script>
-  const meteorNumber = 10;
-  let scene = document.querySelector('body');
-  let names = ['star1','star2','star3','star4'];
-  for (let i = 0; i < meteorNumber; i++) {
-    let num = Math.floor( Math.random()*4 );
-    let topNum = 250 + Math.random() * 50;
-    let meteor = document.createElement('div');
-    meteor.className = names[num];
-    meteor.style.top = -topNum+'px';
-    meteor.style.left = `${50 + Math.random() * 2100}px`;
-    meteor.style.animation = `star ${i / meteorNumber * 3 + 3}s ease-in ${i / meteorNumber * 0.8 + 1}s infinite`;
-    scene.appendChild(meteor);
-  }
-</script>
+  <script>
+    const meteorNumber = 10;
+    let scene = document.querySelector('body');
+    let names = ['star1', 'star2', 'star3', 'star4'];
+    for (let i = 0; i < meteorNumber; i++) {
+      let num = Math.floor(Math.random() * 4);
+      let topNum = 250 + Math.random() * 50;
+      let meteor = document.createElement('div');
+      meteor.className = names[num];
+      meteor.style.top = -topNum + 'px';
+      meteor.style.left = `${50 + Math.random() * 2100}px`;
+      meteor.style.animation = `star ${i / meteorNumber * 3 + 3}s ease-in ${i / meteorNumber * 0.8 + 1}s infinite`;
+      scene.appendChild(meteor);
+    }
+  </script>
 </body>
+
 </html>

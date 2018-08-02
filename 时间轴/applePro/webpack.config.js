@@ -1,7 +1,7 @@
 /**
  * Created by Molay on 16/7/30.
  */
-var webpack = require('webpack');
+let webpack = require('webpack');
 module.exports = {
     entry: {
         'timeLine.min': __dirname + '/src/index.js'

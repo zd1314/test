@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+    body {
+      background: blue
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="canvas" width="500" height="500"></canvas>
+  <script>
+    let c = document.getElementById('canvas');
+    let ctx = c.getContext('2d');
+    ctx.translate(c.width / 2, c.height / 2);
+    // let imgs = new Image()
+    //首先绘制8个静态环绕的圆形
+    function create() {
+
+      for (var i = 1; i < 9; i++) {
+        if (i == 1) {
+          ctx.beginPath();
+          ctx.arc(0, -30, 5, 0, 2 * Math.PI);
+          ctx.fillStyle = '#f0f';
+          ctx.fill();
+        } else {
+          ctx.beginPath();
+          ctx.arc(0, -30, 5, 0, 2 * Math.PI);
+          ctx.strokeStyle = '#000';
+          ctx.stroke();
+        }
+        ctx.rotate(Math.PI * 45 / 180);
+      }
+    }
+    //定时转动
+    setInterval(function () {
+      ctx.clearRect(-c.width / 2, -c.height, c.width, c.height);
+      create();
+      ctx.rotate(Math.PI * 45 / 180);
+    }, 300);
+
+  </script>
+</body>
+
+</html>

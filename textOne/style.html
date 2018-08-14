@@ -73,10 +73,10 @@
         let R = 283;
         let r = R - 30;
         let tR = R + 20;
-        let scaleT = 10;
+        let scalet = 10;
         let scaleAngle = PI / 6;
         let angleFor = -PI + scaleAngle;
-        let angleTo = PI - scaleAngle;
+        let angleto = PI - scaleAngle;
         let colorArr = ['rgba(255,252,0,1)', 'rgba(255,252,0,1)', 'rgba(0,240,253,1)', 'rgba(0,240,253,1)', 'rgba(0,240,253,1)', 'rgba(0,240,253,1)', 'rgba(0,240,253,1)', 'rgba(0,240,253,1)', 'rgba(16,255,143,1)', 'rgba(16,255,143,1)']
 
         let data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((s, i) => {
@@ -162,7 +162,7 @@
             return -(tR + 20) * Math.cos(d.start)
           })
           .text(function (d, i) {
-            return i * scaleT
+            return i * scalet
           });
 
         // me.rotate(me.state.value);

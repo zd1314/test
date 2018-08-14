@@ -83,14 +83,14 @@ function flattenArray(arr) {
         console.log(flatArr)
 按指定的字节截取字符串
 function cutStr(str,L){    
-    var result = '',
+    let result = '',
         strlen = str.length, // 字符串长度
         chrlen = str.replace(/[^\x00-\xff]/g,'**').length; // 字节长度
 
     if(chrlen<=L){return str;}
     
-    for(var i=0,j=0;i<strlen;i++){
-        var chr = str.charAt(i);
+    for(let i=0,j=0;i<strlen;i++){
+        let chr = str.charAt(i);
         if(/[\x00-\xff]/.test(chr)){
             j++; // ascii码为0-255，一个字符就是一个字节的长度
         }else{

@@ -30,9 +30,9 @@ class Pie {
 		//定义一个g	
 		let g = me.svg.append('g')
 			.attr('transform', `translate(${me.width / 2} ${me.height / 2})`)
-
+		let arcPath = g.append('g').attr('class', 'arcPath')
 		//包含很多g 每个小g里边有一个path一个text
-		let slices = g.selectAll('g').data(pieData).enter().append('g')
+		let slices = arcPath.selectAll('g').data(pieData).enter().append('g')
 			//鼠标滑过让每个path半径变大
 			.on('mouseover', function () {
 				d3.select(this).select('path').transition().attr('d', function (d) {
@@ -67,6 +67,12 @@ class Pie {
 				return d.data;
 			});
 		//画label
-
+		let lines = g.append('g').attr('class', 'lines')
+		let line = lines.selectAll('line').data(pieData)
+			.enter()
+			.append('line')
+			.attr('')
+		//画label
+		let label = g.append('g').attr('class', 'label')
 	}
 }

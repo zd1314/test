@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<head>
+  <title></title>
+</head>
+
+<body>
+  <canvas id="canvas"></canvas>
+  <script type="text/javascript">
+    var s = window.screen;
+    var width = canvas.width = 907;
+    var height = canvas.height = 896;
+    var letters = Array(256).join(1).split('');
+
+    var draw = function () {
+      canvas.getContext('2d').fillStyle = 'rgba(0,0,0,.05)';
+      canvas.getContext('2d').fillRect(0, 0, 907, 896);
+      canvas.getContext('2d').fillStyle = '#fff';
+      letters.map(function (y_pos, index) {
+        text = String.fromCharCode(78 + Math.random() * 30);
+        x_pos = index * 50;
+        canvas.getContext('2d').fillText(text, x_pos, y_pos);
+        letters[index] = (y_pos >= 896 + Math.random() * 4) ? 0 : y_pos + 10;
+      });
+    };
+    setInterval(draw, 30);
+  </script>
+</body>
+
+</html>

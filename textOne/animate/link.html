@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    ul {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center
+    }
+
+    ul>li {
+      flex: 1;
+      width: 50px;
+      height: 50px;
+      border-radius: 100%;
+      border: 2px solid deeppink;
+      background: darkorange;
+      text-align: center;
+      line-height: 50px;
+      font-size: 16px;
+      color: #fff;
+      margin-top: 50px;
+      position: relative;
+      animation: moves 2s ease 1s;
+      box-shadow: 2px 2px 8px green
+    }
+
+    ul>li>i {
+      font-size: 20px;
+      color: aqua;
+      position: absolute;
+      left: 245px;
+      bottom: 2px;
+      animation: rotates 2s ease-in 1s infinite
+    }
+
+
+    ul>li>span::before {
+      content: '';
+      width: 2px;
+      height: 15px;
+      background: red;
+      position: absolute;
+      left: 25px;
+      top: 50px
+    }
+
+    ul>li>span::after {
+      content: '';
+      width: 180px;
+      height: 2px;
+      background: blue;
+      position: absolute;
+      bottom: 25px;
+      left: 50px;
+      animation: move 2s ease 1s;
+    }
+
+    @keyframes move {
+      0% {
+        width: 0px;
+      }
+      100% {
+        width: 180px
+      }
+    }
+
+    @keyframes moves {
+      0% {
+        margin-top: 0px;
+      }
+      100% {
+        margin-top: 50px;
+      }
+    }
+
+    @keyframes rotates {
+      0% {
+        transform: rotate(0deg)
+      }
+      100% {
+        transform: rotate(360deg)
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <ul>
+    <li>
+      <span>A</span>
+      <i>ChinaA</i>
+    </li>
+    <li>
+      <span>B</span>
+      <i>ChinaB</i>
+    </li>
+    <li>
+      <span>C</span>
+      <i>ChinaC</i>
+    </li>
+    <li>
+      <span>D</span>
+      <i>ChinaD</i>
+    </li>
+  </ul>
+</body>
+
+</html>

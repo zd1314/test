@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<style>
+  body {
+    background: #333
+  }
+
+  polyline {
+    fill: none;
+    stroke: #fff;
+    stroke-width: 2px;
+    stroke-dasharray: 5px;
+  }
+
+  .node circle {
+    fill: #fff;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+  }
+
+  .node {
+    font: 12px sans-serif;
+  }
+
+  .link {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 1.5px;
+  }
+</style>
+
+<body>
+  <div id='wrap'></div>
+  <script src="./d3.v4.min.js"></script>
+  <script>
+    class Pie {
+      constructor() {
+        let me = this;
+        me.width = 500
+        me.height = 500
+        me.r = 40
+        me.R = 80
+        me.radius = 200
+        me.data = [{
+          name: '蓝天',
+          area: 100
+        }, {
+          name: '白云',
+          area: 200
+        },
+        {
+          name: '花朵',
+          area: 50
+        }, {
+          name: '小草',
+          area: 120
+        }]
+        me.color = ['#9e0142', '#d53e4f', '#abdda4', '#66c2a5'];
+        me.arcAnimDur = 3000;
+        me.secDur = 1000;
+        me.secIndividualdelay = 150;
+      }
+      draw() {
+        let me = this;
+        let wrap = document.getElementById('wrap')
+        let svg = d3.select(wrap).append('svg')
+          .attr('width', me.width)
+          .attr('height', me.height)
+        let g = svg.append('g')
+          .attr('class', 'g-wrap')
+          .attr('transform', `translate(${me.width / 2} ${me.height / 2})`)
+        let lines = svg.append('g')
+          .attr('class', 'svg-lines')
+          .attr('transform', `translate(${me.width / 2} ${me.height / 2})`)
+        let label = svg.append('g')
+          .attr('class', 'svg-label')
+          .attr('transform', `translate(${me.width / 2} ${me.height / 2})`)
+        // .attr('transform', `translate(${me.width / 2} ${me.height / 2})`)
+        let pie = d3.pie()
+          .sort(null)
+          .value(function (d) {
+            return d.area
+          })
+        let pieData = pie(me.data)
+        let arc = d3.arc()
+          .innerRadius(me.r)
+          .outerRadius(me.R)
+        let outerArc = d3.arc()
+          .innerRadius(me.r + 20)
+          .outerRadius(me.R + 20)
+        let gg = g.selectAll('g').data(pieData).enter().append('path')
+          .attr('fill', function (d, i) {
+            return me.color[i]
+          })
+          //添加初始化动画
+          .transition()
+          .delay((d, i) => me.arcAnimDur + (i * me.secIndividualdelay))
+          .duration(me.secDur)
+          .attrTween('d', function (d) {
+            var i = d3.interpolate(d.startAngle, d.endAngle);
+            return function (t) {
+              d.endAngle = i(t);
+              return arc(d);
+            }
+          })
+
+        let midAngle = d => d.startAngle + (d.endAngle - d.startAngle) / 2
+        //添加线label
+        let text = label.selectAll("text")
+          .data(pieData)
+        text.enter()
+          .append('text')
+          .attr('dy', '0.35em')
+          .style("opacity", 0)
+          .style('fill', (d, i) => me.color[i])
+          .text((d, i) => d.data.name)
+          .attr('transform', d => {
+            // calculate outerArc centroid for 'this' slice
+            let pos = outerArc.centroid(d)
+            // define left and right alignment of text labels 							
+            pos[0] = me.radius * (midAngle(d) < Math.PI ? 1 : -1)
+            return `translate(${pos})`
+          })
+          .style('text-anchor', d => midAngle(d) < Math.PI ? "start" : "end")
+          .transition()
+          .delay((d, i) => me.arcAnimDur + (i * me.secIndividualdelay))
+          .duration(me.secDur)
+          .style('opacity', 1)
+        //添加线
+        let polyline = lines.selectAll("polyline")
+          .data(pieData)
+        polyline.enter()
+          .append("polyline")
+          .style("opacity", 0.5)
+          .attr('points', d => {
+            let pos = outerArc.centroid(d)
+            pos[0] = me.radius * 0.95 * (midAngle(d) < Math.PI ? 1 : -1)
+            return [arc.centroid(d), arc.centroid(d), arc.centroid(d)]
+          })
+          .transition()
+          .duration(me.secDur)
+          .delay((d, i) => me.arcAnimDur + (i * me.secIndividualdelay))
+          .attr('points', d => {
+            let pos = outerArc.centroid(d)
+            pos[0] = me.radius * 0.95 * (midAngle(d) < Math.PI ? 1 : -1)
+            return [arc.centroid(d), outerArc.centroid(d), pos]
+          })
+      }
+    }
+    let pies = new Pie()
+    pies.draw()
+  </script>
+</body>
+
+</html>

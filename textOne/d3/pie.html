@@ -14,7 +14,7 @@
 
     polyline {
       fill: none;
-      stroke: #000000;
+      stroke: greenyellow;
       stroke-width: 2px;
       stroke-dasharray: 5px;
     }
@@ -25,10 +25,13 @@
   <div class="container">
     <svg width="100%" height="100%"></svg>
   </div>
-  <script src="./d3.min.js" charset="utf-8"></script>
+  <script src="./d3.v4.min.js" charset="utf-8"></script>
   <script>
     window.onload = function () {
       let width = 600, height = 300;
+      let arcAnimDur = 200,
+        secDur = 1000,
+        secIndividualdelay = 150;
       // 创建一个分组用来组合要画的图表元素
       let main = d3.select('.container svg').append('g')
         .classed('main', true)
@@ -39,7 +42,11 @@
         { name: '日常饮食', value: 300 },
         { name: '医药', value: 1400 },
         { name: '交通', value: 402 },
-        { name: '杂费', value: 134 }
+        { name: '娱乐', value: 1200 },
+        { name: '餐饮', value: 569 },
+        { name: '商务', value: 980 },
+        { name: '消费', value: 269 },
+        { name: '生活', value: 678 }
       ];
       // 转换原始数据为能用于绘图的数据
       let pie = d3.pie()
@@ -71,47 +78,56 @@
         .attr('fill', function (d, i) {
           return getColor(i);
         })
-        .attr('d', function (d) {
-          return arc(d);
-        });
+        .transition()
+        .delay((d, i) => arcAnimDur + (i * secIndividualdelay))
+        .duration(secDur)
+        .attrTween('d', function (d) {
+          var i = d3.interpolate(d.startAngle, d.endAngle);
+          return function (t) {
+            d.endAngle = i(t);
+            return arc(d);
+          }
+        })
       // 添加文字标签
       let texts = labels.selectAll('text')
         .data(pieData)
         .enter()
         .append('text')
         .attr('dy', '0.35em')
-        .attr('fill', function (d, i) {
-          return getColor(i);
+        .style("opacity", 0)
+        .style('fill', (d, i) => getColor[i])
+        .text((d, i) => d.data.name)
+        .attr('transform', d => {
+          // calculate outerArc centroid for 'this' slice
+          let pos = outerArc.centroid(d)
+          // define left and right alignment of text labels 							
+          pos[0] = radius * (midAngel(d) < Math.PI ? 1.5 : -1.5)
+          return `translate(${pos})`
         })
-        .text(function (d, i) {
-          return d.data.name;
-        })
-        .style('text-anchor', function (d, i) {
-          return midAngel(d) < Math.PI ? 'start' : 'end';
-        })
-        .attr('transform', function (d, i) {
-          // 找出外弧形的中心点
-          let pos = outerArc.centroid(d);
-          // 改变文字标识的x坐标
-          pos[0] = radius * (midAngel(d) < Math.PI ? 1.5 : -1.5);
+        .style('text-anchor', d => midAngel(d) < Math.PI ? "start" : "end")
+        .transition()
+        .delay((d, i) => arcAnimDur + (i * secIndividualdelay))
+        .duration(secDur)
+        .style('opacity', 1)
 
-          return 'translate(' + pos + ')';
-        })
-        .style('opacity', 1);
 
       let polylines = lines.selectAll('polyline')
         .data(pieData)
         .enter()
         .append('polyline')
         .attr('points', function (d) {
-          return [arc.centroid(d), arc.centroid(d), arc.centroid(d)];
-        })
-        .attr('points', function (d) {
           let pos = outerArc.centroid(d);
           pos[0] = radius * (midAngel(d) < Math.PI ? 1.5 : -1.5);
-          return [oArc.centroid(d), outerArc.centroid(d), pos];
+          return [oArc.centroid(d), oArc.centroid(d), oArc.centroid(d)]
         })
-        .style('opacity', 0.5);
+        .transition()
+        .duration(secDur)
+        .delay((d, i) => arcAnimDur + (i * secIndividualdelay))
+        .attr('points', d => {
+          let pos = outerArc.centroid(d)
+          pos[0] = radius * 0.95 * (midAngel(d) < Math.PI ? 1.5 : -1.5)
+          return [oArc.centroid(d), outerArc.centroid(d), pos]
+        })
     };
     function midAngel(d) {
       return d.startAngle + (d.endAngle - d.startAngle) / 2;

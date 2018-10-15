@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    #wrap {
+      position: relative;
+      width: 400px;
+      height: 300px;
+      margin: 110px;
+      background: url('./2.jpg');
+      cursor: crosshair;
+      /*改变鼠标样式*/
+    }
+
+    #magnif {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 200px;
+      height: 150px;
+      background: thistle;
+      opacity: 0.5;
+      display: none;
+
+    }
+
+    #mark {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 400px;
+      height: 300px;
+      background: pink;
+      opacity: 0;
+    }
+
+    #bgPic {
+      position: absolute;
+      left: 550px;
+      top: 100px;
+      display: none;
+      width: 400px;
+      height: 300px;
+      border: 1px darkgray solid;
+      overflow: hidden;
+    }
+
+    #imgs {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    #fffff {
+      margin: 200px auto;
+      width: 500px;
+      height: 40px;
+      background: red;
+      border-top-left-radius: 20px;
+      border-bottom-left-radius: 20px
+    }
+  </style>
+</head>
+
+<body>
+  <div id='wrap'>
+    <div id='magnif'></div>
+    <div id='mark'></div>
+  </div>
+  <div id='bgPic'>
+    <img src="./2.jpg" alt="" id='imgs'>
+  </div>
+  <div id='fffff'></div>
+  <script>
+    let wrap = document.getElementById('wrap');
+    let magnif = document.getElementById('magnif');
+    let mark = document.getElementById('mark');
+    let bgPic = document.getElementById('bgPic');
+    let imgs = document.getElementById('imgs')
+    mark.onmousemove = function (e) {
+      let ev = window.event || e;
+      let evx = ev.offsetX;
+      let evy = ev.offsetY;
+      document.title = evx + '|' + evy;
+      let wrap_x = evx - 100;
+      let wrap_y = evy - 75;
+      if (wrap_x < 0) {                          //赋值前判断方块是否出界并处理
+        wrap_x = 0;
+      }
+      if (wrap_x > 200) {
+        wrap_x = 200;
+      }
+      if (wrap_y < 0) {
+        wrap_y = 0;
+      }
+      if (wrap_y > 150) {
+        wrap_y = 150;
+      }
+      bgPic.style.display = 'block';
+      magnif.style.display = 'block';
+      magnif.style.left = wrap_x + 'px';
+      magnif.style.top = wrap_y + 'px';
+      let imgs_x = -2 * wrap_x;
+      let imgs_y = -2 * wrap_y;
+      imgs.style.left = imgs_x + 'px';
+      imgs.style.top = imgs_y + 'px'
+    }
+    wrap.onmouseout = function () {
+      bgPic.style.display = 'none';
+      magnif.style.display = 'none';
+    }
+  </script>
+</body>
+
+</html>

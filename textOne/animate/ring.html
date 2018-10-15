@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="demo">
+    <ul id='oul'>
+    </ul>
+  </div>
+
+  <style>
+    .demo {
+      width: 600px;
+      height: 600px;
+      background-color: #000000;
+      padding: 100px;
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    .demo ::before {
+      content: '';
+      position: absolute;
+      width: 30px;
+      height: 300px;
+      top: 0;
+      left: -199px;
+      /* overflow: hidden; */
+      background-image: linear-gradient(to right, rgba(255, 255, 255, .2) 0, rgba(255, 255, 255, .5) 50%, rgba(255, 255, 255, .2) 100%);
+      /*linear-gradient渐变效果*/
+      background-repeat: no-repeat;
+      transform: skewX(-25deg);
+    }
+
+    ul,
+    li {
+      margin: 0;
+      list-style: none;
+      padding: 0;
+    }
+
+    ul {
+      width: 400px;
+      height: 400px;
+      background: linear-gradient(yellow, green);
+      border-radius: 100%;
+      position: relative;
+      animation: moves 5s infinite;
+    }
+
+    li {
+      width: 40px;
+      height: 40px;
+      position: absolute;
+      background: rosybrown;
+      border-radius: 50%;
+      line-height: 40px;
+      text-align: center;
+      left: 50%;
+      margin-left: -20px;
+      margin-top: -20px;
+      transform-origin: 20px 220px;
+    }
+
+    @keyframes moves {
+      from {
+        transform: rotate(360deg)
+      }
+      to {
+        transform: rotate(0deg)
+      }
+    }
+  </style>
+  <script>
+    let ul = document.getElementById('oul');
+    for (let i = 0; i < 8; i++) {
+      let li = document.createElement('li')
+      li.innerHTML = i + 1;
+      li.style.transform = `rotate(${45 * (i + 1)}deg)`
+      ul.appendChild(li)
+    }
+  </script>
+</body>
+
+</html>

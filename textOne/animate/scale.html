@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #scale {
+      width: 300px;
+      height: 200px;
+      background: linear-gradient( pink, blue);
+      position: absolute;
+      left: 50px;
+      top: 20px;
+      transform-style: preserve-3d;
+      transform-origin: center center;
+      animation: starts 1s infinite forwards;
+
+    }
+
+    @keyframes starts {
+      0% {
+        transform: rotateZ(-90deg) rotateY(-90deg);
+      }
+      100% {
+        transform: rotateZ(0deg) rotateY(0deg);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id='scale'></div>
+</body>
+
+</html>

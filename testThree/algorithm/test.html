@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+	let obj={'result':[{x:2,y:1},{x:1,y:1},{x:3,y:1},{x:1,y:1},{x:2,y:1}]}
+	let datas=[];
+	let arr=obj.result;
+	for(let i=0;i<arr.length;i++){
+		for(let j=i+1;j<arr.length;j++){
+			if(arr[i].x==arr[j].x && arr[i].y==arr[j].y){
+				arr[i].z=i+1;
+				arr[j].z=j;
+				console.log(i)
+				console.log(j)
+			}
+		}
+	}
+	console.log(arr)
+	</script>
+</body>
+</html>

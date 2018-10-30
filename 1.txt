@@ -41,7 +41,7 @@ http://blockbuilder.org/search#d3version=v4
 
 layui��ܲ���
 
-//���ȡɫ�����ַ�����
+
  function bg1(){
              return '#'+Math.floor(Math.random()*256).toString(10);
          }
@@ -52,5 +52,5 @@ layui��ܲ���
              let r=Math.floor(Math.random()*256);
              let g=Math.floor(Math.random()*256);
              let b=Math.floor(Math.random()*256);
-             return "rgb("+r+','+g+','+b+")";//���з�����ƴ�Ӷ�������ES6������`�����ַ���{$������}`�滻
+             return "rgb("+r+','+g+','+b+")";
          }

@@ -22,8 +22,8 @@
         this.endAngle = Math.PI / 2;
         this.R = 80, this.r = 70;
         this.data = [
-          { name: '列表1', value: 20 },
-          { name: '列表2', value: 50 },
+          { name: '列表1', value: 50 },
+          { name: '列表2', value: 80 },
           { name: '列表3', value: 100 }];
         this.pie = d3.pie().sort(null).value(function (d) {
           return d.value
@@ -73,9 +73,9 @@
           .attrTween('d', function (d, i) {
             let linears = d3.scaleLinear()
               .domain([0, 100])
-              .range([me.startAngle, -d.value])
+              .range([me.startAngle, me.endAngle])
             return function (t) {
-              return me.create(me.r + (i * 25), me.R + (i * 25), me.startAngle, linears(t))
+              return me.create(me.r + (i * 25), me.R + (i * 25), me.startAngle, linears(d.value * t))
             }
           })
           .attr('fill', function (d, i) {

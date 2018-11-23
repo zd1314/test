@@ -28,90 +28,6 @@
 			transform-origin: 50% 50%;
 		}
 
-		.layer:nth-child(1) {
-			animation-delay: -1s;
-		}
-
-		.layer:nth-child(2) {
-			animation-delay: -2s;
-		}
-
-		.layer:nth-child(3) {
-			animation-delay: -3s;
-		}
-
-		.layer:nth-child(4) {
-			animation-delay: -4s;
-		}
-
-		.layer:nth-child(5) {
-			animation-delay: -5s;
-		}
-
-		.layer:nth-child(6) {
-			animation-delay: -6s;
-		}
-
-		.layer:nth-child(7) {
-			animation-delay: -7s;
-		}
-
-		.layer:nth-child(8) {
-			animation-delay: -8s;
-		}
-
-		.layer:nth-child(9) {
-			animation-delay: -9s;
-		}
-
-		.layer:nth-child(10) {
-			animation-delay: -10s;
-		}
-
-		.layer:nth-child(11) {
-			animation-delay: -11s;
-		}
-
-		.layer:nth-child(12) {
-			animation-delay: -12s;
-		}
-
-		.layer:nth-child(13) {
-			animation-delay: -13s;
-		}
-
-		.layer:nth-child(14) {
-			animation-delay: -14s;
-		}
-
-		.layer:nth-child(15) {
-			animation-delay: -15s;
-		}
-
-		.layer:nth-child(16) {
-			animation-delay: -16s;
-		}
-
-		.layer:nth-child(17) {
-			animation-delay: -17s;
-		}
-
-		.layer:nth-child(18) {
-			animation-delay: -18s;
-		}
-
-		.layer:nth-child(19) {
-			animation-delay: -19s;
-		}
-
-		.layer:nth-child(20) {
-			animation-delay: -20s;
-		}
-
-		.layer:nth-child(21) {
-			animation-delay: -21s;
-		}
-
 		@keyframes zoom {
 			0% {
 				transform: perspective(250px) translate3d(0, 0, -500px);
@@ -138,14 +54,6 @@
 </head>
 
 <body>
-	<!-- <ul>
-			<li>1</li>
-			<li>2</li>
-			<li>3</li>
-			<li>4</li>
-			<li>3</li>
-		</ul> -->
-
 	<script>
 		let layers = 20;
 		let starsPerLayer = 80;
@@ -153,6 +61,7 @@
 			for (let i = 0; i < layers; i++) {
 				let newLayer = document.createElement('div');
 				newLayer.classList.add('layer');
+				newLayer.style.animationDelay = -(i + 1) + 's';
 				populateParticles(starsPerLayer, newLayer);
 				document.body.appendChild(newLayer);
 			}

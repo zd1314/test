@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    #wrap {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: (-50% -50%)
+    }
+
+    .listBox {
+      width: 300px;
+      height: 300px;
+      background: blue;
+      display: flex;
+      /* flex-direction: column; */
+      justify-content: space-around;
+    }
+
+    .listBox li {
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      background: red;
+    }
+
+    .listItem {
+      margin-top: 20px;
+      width: 300px;
+      height: 50px;
+      /* border: 1px solid black; */
+      display: flex;
+      border-radius: 5px 0 0 5px
+    }
+
+    .listItem p {
+      width: 100px;
+      height: 50px;
+      background: yellow;
+      line-height: 50px;
+      text-align: center;
+      color: blue;
+      font-size: 18px;
+      /* border-right: 1px solid #000; */
+      border: 1px solid #000;
+    }
+
+    .listItem p:first-child {
+      border-radius: 5px 0 0 5px;
+      border-right: none
+    }
+
+    .listItem p:last-child {
+      border-left: none
+    }
+
+    .listItem p:hover {
+      color: #fff;
+      border-color: red;
+      background: blue
+    }
+  </style>
+</head>
+
+<body>
+  <div id="wrap">
+    <ul class="listBox">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+    </ul>
+    <div class="listItem">
+      <p>年</p>
+      <p>月</p>
+      <p>日</p>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -54,6 +54,17 @@
 			name=s.name;
 		})
 		console.log(seriesDatas)
+
+		var strs = [];//字符串数组var str='';
+		for(var i=0;i<12;i++){
+		    strs.push('xx'+i);
+		}//这只是构造一组数据而已
+		for(var i=0,s;s=strs[i++];){//遍历字符串数组
+		    str+=s;
+		    if(!(i%3))str+='\n';
+		}
+		document.write(str);//放到你要放的地方去
+		
 	</script>
 </body>
 </html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>推拽条</title>
+	<style>
+		.box{
+			width:200px;
+			height: 20px;
+			margin:50px auto;
+			position: relative;
+			background:#ccc;
+			border-radius: 10px;
+		}
+		.bigBox{
+			width:200px;
+			height: 20px;
+			position: absolute;
+			background:blue;
+			border-radius: 10px;
+			position: absolute;
+			top:0;
+			left:0;
+		}
+		.smallBox1{
+			width: 20px;
+			height: 20px;
+			border-radius: 50%;
+			background:red;
+			position:absolute;
+			top:0;
+			left:0;
+		}
+		.smallBox2{
+			width: 20px;
+			height: 20px;
+			border-radius: 50%;
+			background:yellow;
+			position:absolute;
+			top:0;
+			left:300px;
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<div class="bigBox"></div>
+		<div class="smallBox1"></div>
+		<div class="smallBox2"></div>
+	</div>
+	<script type="text/javascript">
+		var oBox=document.querySelector('.box'),
+			bBox=document.querySelector('.bigBox'),
+			sBox1=document.querySelector('.smallBox1'),
+			sBox2=document.querySelector('.smallBox2');
+		var boxW=bBox.offsetWidth;
+ 
+		//首先实现两个smallBox的拖拽
+		sBox1.onmousedown=function(e){
+			var ev=e||window.event;
+			//鼠标在box1的哪个位置
+			var offset_x=ev.offsetX;
+			document.onmousemove=function(e){
+				var ev=e||window.event;
+				var x=ev.clientX-oBox.offsetLeft-offset_x;
+				x>=oBox.offsetWidth-sBox1.offsetWidth?x=oBox.offsetWidth-sBox1.offsetWidth:x;
+				x<=0?x=0:x;
+				sBox1.style.left=x+'px';
+				//同时可以设置bigBox的宽度随着小球移动而变化
+				bBox.style.width=Math.abs(sBox2.offsetLeft-sBox1.offsetLeft)+sBox1.offsetWidth+'px';
+ 
+				//实现sBox交叉效果
+				if(sBox2.offsetLeft-sBox1.offsetLeft<0){
+					bBox.style.left=sBox2.offsetLeft+'px';
+				}else{
+					bBox.style.left=x+'px';
+				}
+ 
+			}
+			document.onmouseup=function(){
+				document.onmousemove=null;
+			}
+ 
+		}
+ 
+		sBox2.onmousedown=function(e){
+			var ev=e||window.event;
+			var offset_x=ev.offsetX;
+			document.onmousemove=function(e){
+				var ev=e||window.event;
+				var x=ev.clientX-oBox.offsetLeft-offset_x;
+				x>=oBox.offsetWidth-sBox2.offsetWidth?x=oBox.offsetWidth-sBox2.offsetWidth:x;
+				x<=0?x=0:x;
+				sBox2.style.left=x+'px';
+				//同时可以设置bigBox的宽度随着小球移动而变化，此时要考虑另一端的滑块已经滑动了一些距离
+				bBox.style.width=Math.abs(sBox2.offsetLeft-sBox1.offsetLeft)+sBox2.offsetWidth+'px';//由于之前移动了box1，所以bigbox的width以及left不再是初始值bigW那样了，可以在down的时候获得一下bigbox的宽度，但是注意不能在move的时候获得bigbox的width
+ 
+				//实现sBox交叉效果
+				if(sBox2.offsetLeft-sBox1.offsetLeft<0){
+					bBox.style.left=x+'px';
+				}else{
+					bBox.style.left=sBox1.offsetLeft+'px';
+				}
+ 
+			}
+			document.onmouseup=function(){
+				document.onmousemove=null;
+			}
+		}
+	</script>
+</body>
+</html>

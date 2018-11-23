@@ -1,4 +1,4 @@
-http://up.qq.com/act/a20170301pre/index.html#
+﻿http://up.qq.com/act/a20170301pre/index.html#
 
 
 https://ant.design/docs/spec/visual
@@ -105,3 +105,9 @@ function cutStr(str,L){
 }
 console.log(cutStr("各种可视化工具以及原生的方法结合而成的效果图",10));
 console.log(cutStr("abcdefghigklmn",10));
+
+、、、、、、、、、、D3文字跳动
+
+https://bl.ocks.org/mbostock/3808218
+https://bl.ocks.org/mbostock/3808234
+https://bl.ocks.org/mbostock/3808221

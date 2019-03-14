@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='pie'></div>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script>
+    class Pie {
+      constructor() {
+        this.dom = document.getElementById('pie');
+        this.width = 500;
+        this.height = 500;
+        this.color = ['blue', 'orange', 'aqua']
+        this.startAngle = 3 / 2 * Math.PI;
+        this.endAngle = Math.PI / 2;
+        this.R = 80, this.r = 70;
+        this.data = [
+          { name: '列表1', value: 50 },
+          { name: '列表2', value: 80 },
+          { name: '列表3', value: 100 }];
+        this.pie = d3.pie().sort(null).value(function (d) {
+          return d.value
+        })
+      }
+      //arc函数
+      create(r, R, start, end) {
+        let arc = d3.arc()
+          .innerRadius(r)
+          .outerRadius(R)
+          .startAngle(start)
+          .endAngle(end)
+          .cornerRadius([30])
+        return arc();
+      }
+
+      //开始画图
+      draw() {
+        let me = this;
+        let pie = this.pie
+        let pieData = me.pie(me.data)
+        let svg = d3.select(me.dom).append('svg')
+          .attr('width', me.width)
+          .attr('height', me.height)
+        let linear = d3.scaleLinear()
+          .domain([0, 1])
+          .range([me.startAngle, me.endAngle])
+
+        let g = svg.append('g').attr('class', 'g-all')
+          .attr('transform', `translate(${me.width / 2} ${me.height / 2})`)
+          .selectAll('path').data(pieData).enter().append('path')
+          .transition()
+          .duration(1000)
+          .attrTween('d', function (d, i) {
+            return function (t) {
+              return me.create(me.r + (i * 25), me.R + (i * 25), me.startAngle, linear(t))
+            }
+          })
+          .attr('fill', function (d, i) {
+            return 'pink'
+          })
+        let gg = svg.append('g').attr('class', 'g-data')
+          .attr('transform', `translate(${me.width / 2} ${me.height / 2})`)
+          .selectAll('path').data(pieData).enter().append('path')
+          .transition()
+          .duration(1000)
+          .attrTween('d', function (d, i) {
+            let linears = d3.scaleLinear()
+              .domain([0, 100])
+              .range([me.startAngle, me.endAngle])
+            return function (t) {
+              return me.create(me.r + (i * 25), me.R + (i * 25), me.startAngle, linears(d.value * t))
+            }
+          })
+          .attr('fill', function (d, i) {
+            return me.color[i]
+          })
+      }
+    }
+    let circle = new Pie()
+    circle.draw()
+
+  </script>
+</body>
+
+</html>

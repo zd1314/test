@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="file-div">
+        <input type="file" name="inputfile" accept="text/plain, text/css, text/html, text/javascript, text/markdown" />
+        <textarea name="filereader" placeholder="请选择txt、js、css或html文件，文件内容会被自动读取"></textarea>
+        <button type="button" name="storebutton">本地存储</button>
+        <button type="button" name="clearbutton">清除存储</button>
+    </div>
+
+    <script>
+        /*
+        1. localStorage的存储 5M;
+        2.只能存储字符串 数据复杂需要用Json.stringfy()来转换
+        */
+        let user = {
+            name: '丹妮儿',
+            id: '235',
+            isVip: 'true',
+            arr: [2, 3, 4]
+        }
+        let str = JSON.stringify(user);
+        localStorage.setItem('userInfor', str);
+        //提取用户信息
+        let infoStr = localStorage.getItem('userInfor');
+        let info = JSON.parse(infoStr);
+
+        //input测试
+        window.onload = function () {
+            let text = document.getElementsByName('filereader')[0];
+            let inputfile = document.getElementsByName('inputfile')[0];
+            let storebutton = document.getElementsByName('storebutton')[0];
+            let clearbutton = document.getElementsByName('clearbutton')[0];
+            //监测localStorage中是否已有缓存
+            if (window.localStorage.getItem('textareaStorage')) {
+                text.value = window.localStorage.getItem('textareaStorage');
+            }
+            //上传文件
+            inputfile.onchange = function () {
+                let reader = new FileReader();
+                console.log(reader)
+                reader.readAsText(this.files[0], 'UTF-8');
+                reader.onload = function (e) {
+                    let urlData = this.result;
+                    text.value = urlData;
+                    console.log(urlData)
+                }
+            }
+            storebutton.onclick = function () {
+                window.localStorage.setItem('textareaStorage', text.value)
+            }
+            clearbutton.onclick = function () {
+                window.localStorage.removeItem('textareaStorage')
+            }
+        }
+    
+    </script>
+</body>
+
+</html>

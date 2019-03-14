@@ -1,0 +1,22 @@
+面向对象基本用法：
+   function 构造函数(){
+    this.属性＝??;
+}
+构造函数.prototype.方法=function(){}
+            
+var 实例对象=new 构造函数();
+实例对象.方法();
+//例如： class Point{
+  constructor(x,y){
+    this.x=x;
+    this.y=y
+  }
+  toString(){
+    return `(${this.x} ${this.y})`
+  }
+  toValue(){
+    return this.x+this.y
+  }
+}
+let aa=new Point(1,2);
+aa.toValue()

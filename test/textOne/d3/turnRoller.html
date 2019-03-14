@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='ball'></div>
+  <script src='./d3.v4.min.js'></script>
+  <script>
+    let width = 1500;
+    let height = 500;
+    let ball = document.getElementById('ball');
+    let data = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    let svg = d3.select(ball).append('svg')
+      .attr('width', width)
+      .attr('height', height)
+      .selectAll('polygon').data(data).enter()
+      .append('polygon')
+      .attr("points", "150.7,516.8 1.5,258.4 150.7,0 449,0 598.2,258.4 449,516.8 ")
+      .attr('stroke', 'black')
+      .attr('fill', 'blue')
+      .attr("transform", function (d, i) {
+        return `scale(0.1)`
+      })
+  </script>
+</body>
+
+</html>

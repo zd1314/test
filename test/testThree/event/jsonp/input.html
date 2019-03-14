@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>淘宝提示词</title>
+</head>
+
+<body>
+    <input type="text" id='inpt' placeholder="请输入">
+    <input type="button" id='btn' value='查询'>
+    <div class="box"></div>
+    <script>
+        let btn = document.getElementById('btn');
+        function aa(data) {
+            let list = '<ul>';
+            data.result.map((s, i) => {
+                list += `<li>${s[0]} </li>`
+            })
+            list += '</ul>';
+            let box = document.querySelector('.box');
+            box.innerHTML = list;
+        }
+        btn.onclick = function () {
+            let keyword = document.getElementById('inpt').value;
+            //动态创建script
+            let script = document.createElement('script');
+            //script添加路径  调用callback函数
+            script.src = "https://suggest.taobao.com/sug?q=" + keyword + "&callback=aa";
+            let head = document.querySelector("head");
+            head.appendChild(script);
+        }
+
+
+    </script>
+</body>
+
+</html>

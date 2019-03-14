@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style type="text/css">
+        #div1 {
+            width: 100px;
+            height: 200px;
+            padding: 20px;
+            overflow: auto;
+            /*三角箭头的颜色*/
+            scrollbar-arrow-color: #f00;
+            /*滚动条滑块按钮的颜色*/
+            scrollbar-face-color: #ff0;
+            /*滚动条整体颜色*/
+            scrollbar-highlight-color: #333;
+            /*滚动条阴影*/
+            scrollbar-shadow-color: #ccc;
+            /*滚动条轨道颜色*/
+            scrollbar-track-color: #666;
+        }
+
+        #wrap {
+            margin: 20px;
+            width: 200px;
+            background: repeating-linear-gradient(135deg, transparent, transparent 3px, blue 5px, red 8px);
+            animation: shine 1s infinite linear;
+            overflow: hidden;
+        }
+
+        .content {
+            height: 128px;
+            margin: 1px;
+            padding: 10px;
+            background: #fff
+        }
+
+        @keyframes shine {
+            0% {
+                background-position: -1px -1px
+            }
+            100% {
+                background-position: -12px -12px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="div1"> scrollHeight: 获取对象的滚动高度。 scrollLeft:设置或获取位于对象左边界和窗口中目前可见内容的最左端之间的距离 scrollTop:设置或获取位于对象最顶端和窗口中可见内容的最顶端之间的距离
+        scrollHeight: 获取对象的滚动高度。 scrollLeft:设置或获取位于对象左边界和窗口中目前可见内容的最左端之间的距离 scrollTop:设置或获取位于对象最顶端和窗口中可见内容的最顶端之间的距离 scrollHeight:
+        获取对象的滚动高度。 scrollLeft:设置或获取位于对象左边界和窗口中目前可见内容的最左端之间的距离 scrollTop:设置或获取位于对象最顶端和窗口中可见内容的最顶端之间的距离 scrollHeight: 获取对象的滚动高度。
+        scrollLeft:设置或获取位于对象左边界和窗口中目前可见内容的最左端之间的距离 scrollTop:设置或获取位于对象最顶端和窗口中可见内容的最顶端之间的距离 scrollHeight: 获取对象的滚动高度。 scrollLeft:设置或获取位于对象左边界和窗口中目前可见内容的最左端之间的距离
+        scrollTop:设置或获取位于对象最顶端和窗口中可见内容的最顶端之间的距离 scrollHeight: 获取对象的滚动高度。 scrollLeft:设置或获取位于对象左边界和窗口中目前可见内容的最左端之间的距离 scrollTop:设置或获取位于对象最顶端和窗口中可见内容的最顶端之间的距离
+        scrollHeight: 获取对象的滚动高度。 scrollLeft:设置或获取位于对象左边界和窗口中目前可见内容的最左端之间的距离 scrollTop:设置或获取位于对象最顶端和窗口中可见内容的最顶端之间的距离 scrollHeight:
+        获取对象的滚动高度。 scrollLeft:设置或获取位于对象左边界和窗口中目前可见内容的最左端之间的距离 scrollTop:设置或获取位于对象最顶端和窗口中可见内容的最顶端之间的距离</div>
+    <div id='wrap'>
+        <div class="content">边框动画</div>
+    </div>
+</body>
+
+</html>

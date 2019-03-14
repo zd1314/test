@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>径向渐变</title>
+	</head>
+	<body>
+		<canvas id="canvas1" width="400" height="400" style="border:1px solid blue;  cursor:wait"></canvas>
+		
+		 <script>
+        let canvas = document.getElementById('canvas1');
+        let ctx = canvas.getContext('2d');
+
+        //当cycle1在cycle2里边时，并且圆心重合
+        let cycle1 = {
+            x: 200,
+            y: 200,
+            r: 25
+        };
+        let cycle2 = {
+            x: 200,
+            y: 200,
+            r: 50
+        };
+
+        ctx.beginPath();
+        ctx.arc(cycle1.x, cycle1.y, cycle1.r, 0, Math.PI * 2, false);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(cycle2.x, cycle2.y, cycle2.r, 0, Math.PI * 2, false);
+        ctx.stroke();
+
+        //使用经向渐变
+        let grd = ctx.createRadialGradient(cycle1.x, cycle1.y, cycle1.r, cycle2.x, cycle2.y, cycle2.r);
+        console.log(grd)
+        grd.addColorStop(0, 'rgba(255,0,0,0.75)');
+        grd.addColorStop(0.5, 'rgba(0,255,0,0.75)');
+        grd.addColorStop(1, 'rgba(0,0,255,0.76)');
+
+        ctx.fillStyle = grd;
+        ctx.fillRect(0, 0, 500, 500);
+
+    </script>
+	</body>
+</html>

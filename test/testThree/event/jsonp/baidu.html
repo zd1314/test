@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>百度热词</title>
+</head>
+
+<body>
+    <input type="text" id='input' placeholder="请输入">
+    <button id='btn'>查询</button>
+    <div class="con"></div>
+    <script>
+        let btn = document.getElementById('btn')
+        btn.onclick = function () {
+            let keyWord = document.getElementById('input').value;
+            let script = document.createElement('script');//动态创建script标签
+            script.src = "https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=" + keyWord + "&cb=haha"
+            window.haha = function (data) {
+                let list = '<ul>';
+                data.s.map((s, i) => {
+                    list += "<li>" + s + "</li>";
+                })
+                list += '</ul>'
+                let box = document.querySelector('.con');
+                box.innerHTML = list;
+            }
+            let head = document.querySelector('head');
+            head.appendChild(script)
+        }
+    </script>
+</body>
+
+</html>

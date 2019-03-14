@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../d3.v4.min.js"></script>
+  <style>
+    /*.g{*/
+
+    /*animation:move 2.5s linear infinite;*/
+
+    /*}*/
+
+    /*@keyframes move {*/
+
+    /*0%{*/
+
+    /*transform:rotate(0);*/
+
+    /*}*/
+
+    /*100%{*/
+
+    /*transform:rotate(360deg);*/
+
+    /*}*/
+
+    /*}*/
+  </style>
+</head>
+
+<body>
+
+  <script>
+    function getRandomColor() {
+      return "#" + ("00000" + ((Math.random() * 16777215 + 0.5) >> 0).toString(16)).slice(-6);
+    }
+    var degree = 360 / 13;
+    var num = 13;
+    var p_r = 140; // 定义六边形半径
+    var w = 800;
+    var h = 800;
+    var svg = d3.select("body")
+      .append('svg')
+      .attr("width", w)
+      .attr("height", h)
+      .append("g")
+      .attr("class", "g")
+      //    .attr("transform-origin","400 250")
+      .attr("transform", `translate(${w / 2} ${h / 2}) rotate(0)`);
+
+    var n = 0;
+    function move() {
+      n += 1;
+
+      svg.attr("transform", `translate(${w / 2} ${h / 2}) rotate(${n})`)
+      //    requestAnimationFrame(move);
+    }
+    move();
+
+
+    var g = svg.selectAll("g")
+      .data(d3.range(num))
+      .enter()
+      .append("g")
+
+      .attr("transform", function (d) {
+        var x = Math.cos(degree * (d + 1) * Math.PI / 180) * p_r;
+        var y = Math.sin(degree * (d + 1) * Math.PI / 180) * p_r;
+        return `translate(${x},${y})`
+      });
+
+    var polygon = g.append("polygon")
+      .attr("points", "150.7,516.8 1.5,258.4 150.7,0 449,0 598.2,258.4 449,516.8 ")
+      .attr("fill", function () {
+        return getRandomColor();
+      })
+      .attr("transform", function (d) {
+        return `scale(0.1)`
+      });
+
+
+    var g_txt = g.selectAll("g")
+      .data(d3.range(num))
+      .enter()
+      .append('g');
+
+
+    var text = g_txt.append('text')
+      .attr('x', 0)
+      .attr('y', 50)
+      .attr('fontSize', 16)
+      .attr('color', 'red')
+      .attr("text-anchor", "middle")
+      .attr("dominant-baseline", "middle")
+      .text(123);
+
+
+
+
+
+  </script>
+
+
+</body>
+
+</html>

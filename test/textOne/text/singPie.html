@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src='../d3.v4.min.js'></script>
+  <script>
+    const middle = [1];
+    class DoubleCircle extends Component {
+      constructor(props) {
+        super(props);
+        let me = this;
+        me.flag = false;
+        me.state = {};
+        me.pie = pie();
+        me.arc = arc();
+        me._list = {
+          width: '1.15rem',
+          height: '0.3rem',
+          fontSize: '0.18rem',
+          color: '#4ac2f9'
+        };
+        me._img1 = {
+          display: 'inline-block',
+          width: '0.2rem',
+          height: '0.1rem',
+          marginLeft: '0.1rem',
+          backgroundColor: '#4ac2f9'
+        };
+        me._img2 = {
+          display: 'inline-block',
+          width: '0.2rem',
+          height: '0.1rem',
+          marginLeft: '0.1rem',
+          backgroundColor: '#3eedf7'
+        };
+        me._img3 = {
+          display: 'inline-block',
+          width: '0.2rem',
+          height: '0.1rem',
+          marginLeft: '0.1rem',
+          backgroundColor: '#48f8c2'
+        };
+        me._img4 = {
+          display: 'inline-block',
+          width: '0.2rem',
+          height: '0.1rem',
+          marginLeft: '0.1rem',
+          backgroundColor: '#8ef453'
+        };
+        me._img5 = {
+          display: 'inline-block',
+          width: '0.2rem',
+          height: '0.1rem',
+          marginLeft: '0.1rem',
+          backgroundColor: '#f5f473'
+        };
+      }
+      setData(d) {
+        console.log(d)
+        let me = this;
+        me.flag = true;
+        me.setState({
+          data: d
+        })
+      }
+
+      shouldComponentUpdate(d) {
+        if (d.data) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      render() {
+        if (this.flag) {
+          let names = this.state.data.name;
+          return (
+            <div style={this.props.style}>
+              <div ref={'box'} style={{
+                float: 'left',
+                width: '2.4rem',
+                height: '2.4rem'
+              }}>
+
+              </div>
+              <div style={{
+                float: 'right',
+                width: '1.15rem',
+                height: '1.55rem',
+                paddingTop: '0.48rem'
+              }}>
+                {<ul>
+                  <li style={this._list}>
+                    <span>{names[0]}</span>
+                    <span style={this._img1}></span>
+                  </li>
+                  <li style={this._list}>
+                    <span>{names[1]}</span>
+                    <span style={this._img2}></span>
+                  </li>
+                  <li style={this._list}>
+                    <span>{names[2]}</span>
+                    <span style={this._img3}></span>
+                  </li>
+                  <li style={this._list}>
+                    <span>{names[3]}</span>
+                    <span style={this._img4}></span>
+                  </li>
+                  <li style={this._list}>
+                    <span>{names[4]}</span>
+                    <span style={this._img5}></span>
+                  </li>
+                </ul>}
+              </div>
+            </div>
+          )
+        } else {
+          return (
+            <div>加载中…………</div>
+          )
+        }
+      }
+      componentDidUpdate() {
+        let me = this;
+        let width = 240;
+        let height = 240;
+        if (me.flag) {
+
+          let value = me.state.data.val;
+          let svg = select(me.refs.box)
+            .append('svg')
+            .attr('class', 'm_svg')
+            .attr('width', width)
+            .attr('height', height);
+          me._global = svg.append('g')
+            .attr('transform', `translate(${width / 2},${height / 2})`);
+
+          me._global2 = svg.append('g')
+            .attr('transform', `translate(${width / 2},${height / 2})`);
+
+          me.maxRadius = Math.min(width, height) / 2;
+          me.endAngle = -(Math.PI + Math.PI / 2);
+          me.startAngle = 0;
+
+          me.end1 = -(Math.PI + Math.PI / 2) * (value[0] / 100);
+          me.end2 = -(Math.PI + Math.PI / 2) * (value[1] / 100);
+          me.end3 = -(Math.PI + Math.PI / 2) * (value[2] / 100);
+          me.end4 = -(Math.PI + Math.PI / 2) * (value[3] / 100);
+          me.end5 = -(Math.PI + Math.PI / 2) * (value[4] / 100);
+
+          me._createText(value[0] + '%', 10, -100);
+          me._createText(value[1] + '%', 10, -80);
+          me._createText(value[2] + '%', 10, -60);
+          me._createText(value[3] + '%', 10, -40);
+          me._createText(value[4] + '%', 10, -20);
+
+          me._createBackgroundArcAll(me.startAngle, me.endAngle, '#214478', 0.95, 0.9);
+          me._createBackgroundArcHalf(me.startAngle, me.end1, '#4ac1fa', 0.95, 0.9);
+
+          me._createBackgroundArcAll(me.startAngle, me.endAngle, '#214478', 0.8, 0.88);
+          me._createBackgroundArcHalf(me.startAngle, me.end2, '#3eedf7', 0.8, 0.88);
+
+          me._createBackgroundArcAll(me.startAngle, me.endAngle, '#214478', 0.65, 0.85);
+          me._createBackgroundArcHalf(me.startAngle, me.end3, '#4cf8c2', 0.65, 0.85);
+
+          me._createBackgroundArcAll(me.startAngle, me.endAngle, '#214478', 0.5, 0.8);
+          me._createBackgroundArcHalf(me.startAngle, me.end4, '#8ef458', 0.5, 0.8);
+
+          me._createBackgroundArcAll(me.startAngle, me.endAngle, '#214478', 0.35, 0.73);
+          me._createBackgroundArcHalf(me.startAngle, me.end5, '#f4f574', 0.35, 0.73);
+          me.flag = false;
+        }
+      }
+
+      _createText(html, left, top) {
+        let me = this;
+        me._global2.append('text')
+          .text(html)
+          .attr('x', left)
+          .attr('y', top)
+          .attr('fill', '#fff')
+          .style('font-size', 18);
+      }
+
+      _createBackgroundArcAll(startAngle, endAngle, color, ins, out) {
+        let me = this;
+        let outRadius = me.maxRadius * ins;
+        let inRadius = outRadius * out;
+        let padAngle = 0.04;
+
+        let arc = me.arc
+          .innerRadius(inRadius)
+          .outerRadius(outRadius)
+          .cornerRadius([30])
+          .startAngle(startAngle)
+          .endAngle(endAngle)
+          .padAngle(padAngle);
+
+        me._global.selectAll('.bgArc')
+          .data(me.pie(middle))
+          .enter()
+          .append('path')
+          .attr('fill', 'transparent')
+          .transition()
+          .duration(500)
+          .attr('d', function (d) {
+            return arc(d)
+          })
+          .attr('fill', color);
+      }
+      _createBackgroundArcHalf(startAngle, endAngle, color, ins, out) {
+        let me = this;
+        let outRadius = me.maxRadius * ins;
+        let inRadius = outRadius * out;
+        let padAngle = 0.04;
+
+        me.arc
+          .innerRadius(inRadius)
+          .outerRadius(outRadius)
+          .cornerRadius([30])
+          .padAngle(padAngle);
+
+        me._global.selectAll('.bgArc')
+          .data(me.pie(middle))
+          .enter()
+          .append('path')
+          .attr('fill', 'transparent')
+          .transition()
+          .duration(500)
+          .attrTween('d', function (d) {
+            return function (t) {
+              let arc = me.arc
+                .innerRadius(inRadius)
+                .outerRadius(outRadius)
+                .cornerRadius([30])
+                .startAngle(startAngle)
+                .endAngle(function () {
+                  return endAngle * t
+                })
+                .padAngle(padAngle);
+              return arc(d)
+            }
+          })
+          .attr('fill', color);
+      }
+    }
+
+    export default DoubleCircle;
+
+  </script>
+</body>
+
+</html>

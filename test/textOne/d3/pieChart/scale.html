@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #container {
+      width: 300px;
+      height: 300px;
+      margin: 50px auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div id='container'></div>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script>
+    class Path {
+      constructor() {
+        this.width = 500;
+        this.height = 500;
+        this.r = 70;
+        this.R = 80;
+        this.dom = document.getElementById('container')
+
+      }
+      _createArc(r, R, start, end) {
+        let arc = d3.arc()
+          .innerRadius(r)
+          .outerRadius(R)
+          .startAngle(start)
+          .endAngle(end)
+        return arc()
+      }
+      _draw() {
+        // let
+      }
+    }
+  </script>
+</body>
+
+</html>

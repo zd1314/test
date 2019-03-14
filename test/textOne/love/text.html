@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+       
+    <meta charset="UTF-8">
+        <title>Title</title>
+</head>
+
+<body>
+    <div style="width:50%; min-height:200px; margin:50px auto">
+        <pre id="language_one" style=" color:#F93; font-size:34px;"></pre>
+        <div style="display:none;" id="language_two">
+                我要一个一个的出现，我要一个一个的出，我要一个一个的出。
+                
+                我要一个一个的出现，我要一个一个的出，我要一个一个的出。
+                
+                我要一个一个的出现，我要一个一个的出，我要一个一个的出。
+
+
+                我要一个一个的出现，我要一个一个的出，我要一个一个的出。
+
+
+                我要一个一个的出现，我要一个一个的出，我要一个一个的出。        
+        </div>
+    </div>
+    <script language="javascript">
+        var index = 0;
+        var word = document.getElementById("language_two").innerHTML;
+        function type() {
+            document.getElementById("language_one").innerText = word.substring(0, index++);
+        }
+        setInterval(type, 100);
+    </script>
+</body>
+
+</html>

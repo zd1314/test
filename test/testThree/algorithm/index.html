@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // function Cat() {
+        //     this.color = 'red';
+        //     this.bird = function () {
+        //         console.log('3333')
+        //     }
+        // }
+        // function Dog() {
+        //     this.extend = Cat;
+        //     this.extend.apply(this.arguments);
+        //     this.flag = function () {
+        //         console.log('444')
+        //     }
+        //     delete this.extend;
+        // }
+        // let aa = new Cat('yellow and black');
+        // console.log(aa.color)
+        // console.log(aa.extend);
+        // aa.bird()
+
+
+        Object.prototype.extend = function (obj) {
+            for (var k in obj) {
+                if (obj.hasOwnProperty(k)) {
+                    // console.log((k))
+                    if (this[k] == undefined) {
+                        this[k] = obj[k]
+                    }
+                }
+            }
+        }
+        let kitty = {
+            color: 'red',
+            bird: function () {
+                console.log('888')
+            }
+        }
+        let hubei = {
+            color: 'yellow and pink'
+        }
+        hubei.extend(kitty);
+        console.log(hubei)
+        hubei.bird()
+    </script>
+</body>
+
+</html>

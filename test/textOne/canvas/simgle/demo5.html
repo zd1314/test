@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.start/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title></title>
+  <style>
+    canvas {
+      background-color: powderblue;
+    }
+  </style>
+</head>
+
+<body>
+  <!--创建300x300的画布-->
+  <canvas id="canvas" width="300" height="300"></canvas>
+  <script type="text/javascript">
+    function Canvas() {
+      this.canvas = document.getElementById("canvas");
+      this.ctx = canvas.getContext("2d");
+      this.start = { x: 0, y: 150 };
+      this.end = { x: 300, y: 150 };
+      this.nowxy = { x: 0, y: 0 };
+      this.i = 1;
+
+    }
+    Canvas.prototype = {
+      init: function () {
+        this.ctx.beginPath();
+        this.ctx.moveTo(this.start.x, this.start.y);
+        this.ctx.lineTo(this.end.x, this.end.y);
+        this.ctx.strokeStyle = 'red';
+        this.ctx.fillStyle = 'yellow';
+        this.ctx.fill()
+        this.ctx.stroke();
+        this.math();
+      },
+      math: function () {
+        this.wid = Math.abs(this.end.x - this.start.x);//x轴的长，绝对值
+        this.hei = Math.abs(this.end.y - this.start.y);//y轴长
+        this.length = Math.pow(Math.pow(this.wid, 2) + Math.pow(this.hei, 2), 1 / 2);//（长平方＋宽平方）开根 ，其实就是直角三角关系
+        if (this.i < this.length) {//通过SetInterval，按照Length方向每次运行1px
+          if (this.start.x < this.end.x) {
+            this.nowxy.x = this.start.x + this.wid / this.length * this.i;
+          }
+          else {
+            this.nowxy.x = this.start - this.wid / this.length * this.i;
+          }
+          if (this.start.y < this.end.y) {
+            this.nowxy.y = this.start.y + this.hei / this.length * this.i;
+          }
+          else {
+            this.nowxy.y = this.start.y - this.hei / this.length * this.i;
+          }
+          this.i++;
+        }
+        this.drawcircle();
+      },
+      drawcircle: function () {
+        this.ctx.beginPath();
+        this.ctx.arc(this.nowxy.x, this.nowxy.y, 10, 0, Math.PI * 2, true);
+        this.ctx.stroke();
+        this.ctx.closePath();
+        this.ctx.beginPath();
+        this.ctx.arc(this.nowxy.x, this.nowxy.y, 5, 0, Math.PI * 2, true);
+        this.ctx.closePath();
+        this.ctx.stroke();
+      },
+      clean: function () {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+      }
+    }
+    setInterval(function () {
+      aa.clean()
+      aa.init()
+
+    }, 100)
+    let aa = new Canvas()
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='wrap'></div>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script>
+    class Pie {
+      constructor() {
+        this.width = 800;
+        this.height = 800;
+        this.r = 60;
+        this.R = 80;
+        this.dom = document.getElementById('wrap');
+        this.data = [
+          { name: '社交', value: 20 },
+          { name: '历史', value: 50 },
+          { name: '绘画', value: 80 }
+        ];
+        this.pie = d3.pie().sort(null).value(function (d) {
+          return d.value
+        });
+        this.colorStart = ['#f2f504', '#00ffe8', '#d34e80'];
+        this.colorEnd = ['#869a3a', '#039bae', '#824175']
+      }
+      createArc(r, R, start, end, pad) {
+        let arc = d3.arc()
+          .innerRadius(r)
+          .outerRadius(R)
+          .startAngle(start)
+          .endAngle(end)
+          .padAngle(pad)
+        return arc();
+      }
+      draw() {
+        let me = this;
+        let svg = d3.select(me.dom).append('svg')
+          .attr('width', me.width)
+          .attr('height', me.height)
+        let pieData = me.pie(me.data);
+        //渐变
+        let linears = svg.append('defs').selectAll('linearGradient').data(me.colorStart).enter()
+          .append("linearGradient")
+          .attr("id", function (d, i) {
+            return `row-svg-color${i}`;
+          })
+          .attr("x1", "0%")
+          .attr("y1", "0%")
+          .attr("x2", "100%")
+          .attr("y2", "0%");
+        linears.append('stop')
+          .attr("offset", `0%`)
+          .style("stop-color", function (d, i) {
+            return me.colorStart[i];
+          });
+        linears.append('stop')
+          .attr("offset", `100%`)
+          .style("stop-color", function (d, i) {
+            return me.colorEnd[i];
+          });
+
+        let g = svg.append('g').attr('class', 'g-wrap').attr('transform', `translate(${me.width / 2} ${me.height / 2})`)
+        let path = g.selectAll('path').data(pieData).enter().append('path')
+          .attr('d', function (d, i) {
+            return me.createArc(me.r, me.R, d.startAngle, d.endAngle, 0.05)
+          })
+          .attr('stroke', function (d, i) {
+            return me.colorStart[i]
+          })
+          .attr('stroke-width', 2)
+          .attr('fill', function (d, i) {
+            return `url(#row-svg-color${i})`;
+          })
+          .on('mouseover', function (d, i) {
+            d3.select(this).attr('d', function (d, i) {
+              return me.createArc(me.r, me.R + 10, d.startAngle, d.endAngle, 0.07)
+            })
+          })
+          .on('mouseout', function (d, i) {
+            d3.select(this).attr('d', function (d, i) {
+              return me.createArc(me.r, me.R, d.startAngle, d.endAngle, 0.05)
+            })
+          })
+        let lines = svg.append('g').attr('class', 'g-lines').attr('transform', `translate(${me.width / 2} ${me.height / 2})`)
+        let line = lines.selectAll('path').data(pieData).enter().append('path')
+      }
+    }
+    let pie = new Pie();
+    pie.draw()
+  </script>
+</body>
+
+</html>

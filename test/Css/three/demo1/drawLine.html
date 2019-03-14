@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script type="text/javascript" src="../three.js"></script>
+    <script>
+        let renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+        /* PerspectiveCamera(fov, aspect, near, far)
+            - fov 可视角度
+            - aspect 为width / height, 通常设置为canvas元素的高宽比。
+            - near近端距离
+            - far远端距离
+         只有离相机的距离大于near值，小于far值，且在相机的可视角度之内，才能被相机投影到
+         */
+        let camera = new THREE.PerspectiveCamera(145, window.innerWidth / window.innerHeight, 10, 10000);
+        camera.position.set(0, 0, 100);
+        camera.lookAt(0, 0, 0);
+        let scene = new THREE.Scene();
+        let material = new THREE.LineBasicMaterial({ color: 0xff000 });
+        let geometry = new THREE.Geometry();
+        geometry.vertices.push(new THREE.Vector3(-100, 0, 0));
+        geometry.vertices.push(new THREE.Vector3(0, 100, 0))
+        geometry.vertices.push(new THREE.Vector3(100, 0, 0));
+        geometry.vertices.push(new THREE.Vector3(100, 0, 0));
+        geometry.vertices.push(new THREE.Vector3(0, -100, 0))
+        geometry.vertices.push(new THREE.Vector3(-100, 0, 0));
+        let line = new THREE.Line(geometry, material);
+        scene.add(line);
+        renderer.render(scene, camera);
+    </script>
+</body>
+
+</html>

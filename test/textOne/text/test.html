@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<style>
+  html,
+  body {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(brown, sandybrown) no-repeat;
+  }
+
+  .text {
+    font-size: 5em;
+    font-family: "arial black";
+    position: relative;
+    color: transparent;
+  }
+
+  .text::before,
+  .text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: blue;
+    transition: 0.2s;
+  }
+
+  .text::before {
+    clip-path: polygon(0 0, 60% 0, 30% 100%, 0 100%);
+  }
+
+  .text::after {
+    clip-path: polygon(60% 0, 100% 0, 100% 100%, 30% 100%);
+  }
+
+  .text:hover::before {
+    left: -0.15em;
+    transform: rotate(-5deg);
+    top: -0.05em;
+  }
+
+  .text:hover::after {
+    left: 0.15em;
+    transform: rotate(5deg);
+    top: 0.05em;
+  }
+
+  .radius {
+    width: 300px;
+    height: 300PX;
+    clip-path: circle(50% at 50% 50%);
+    position: absolute;
+    right: 20px;
+    top: 30px;
+    animation: active 1s infinite linear;
+  }
+
+  img:nth-child(1) {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    left: 20px;
+    top: 30px;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0% 75%);
+    animation: move 1s infinite linear 3s;
+  }
+
+  @keyframes active {
+    0% {
+      right: 50px;
+      -webkit-clip-path: polygon(50% 0%, 63% 38%, 100% 38%, 69% 59%, 82% 100%, 50% 75%, 18% 100%, 31% 59%, 0 38%, 37% 38%);
+    }
+    100% {
+      right: 20px;
+    }
+  }
+
+  @keyframes move {
+    0% {
+      left: 20px;
+      transform: translateX(-200px) rotateX(30deg) translateZ(50px);
+      clip-path: inset(25% 0 25% 0 round 0 25% 0 25%)
+    }
+    100% {
+      left: 50px;
+      transform: translateX(200px) rotateX(0deg) translateZ(-100px)
+    }
+  }
+</style>
+
+<body>
+  <img src='./img/img/3.jpg' alt="">
+  <div class="text" data-text="数据可视化">数据可视化</div>
+  <img class="radius" src="./img/img/2.jpg" alt="">
+</body>
+
+</html>

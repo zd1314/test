@@ -1,0 +1,116 @@
+﻿http://up.qq.com/act/a20170301pre/index.html#
+
+
+https://ant.design/docs/spec/visual
+
+
+
+https://antv.alipay.com/zh-cn/g2/3.x/index.html
+
+
+https://antv.alipay.com/zh-cn/f2/3.x/index.html
+
+https://antv.alipay.com/zh-cn/g6/1.x/index.html
+
+
+����: https://pan.baidu.com/s/1h7egt1Jp9QFz_GUWv280WQ ����: r3qe
+
+
+http://www.zcool.com.cn/work/ZMjU2NTYwODA=.html
+
+
+https://www.jb51.net/article/112416.htm-------------------------------------------444444444444444444444
+
+css/html
+
+https://segmentfault.com/a/1190000005174755
+
+https://segmentfault.com/a/1190000005353213
+
+
+
+http://202.106.10.250:8014/visus/#/system-status===============================�ſ��Ч��
+https://blog.csdn.net/binginsist/article/details/65630547======================================vue2.0
+
+https://blog.csdn.net/selina_chan/article/details/51260516-------------------------d3��ͼ
+
+/**/http://192.168.16.209:9096/ntp/detailsjump/list ��ͨ����
+
+D3  
+http://blog.mn886.net/chenjianhua/show/773c07b3abce/index.html
+https://github.com/xswei/SVG_Essentials
+https://bl.ocks.org/mbostock
+http://blockbuilder.org/search#d3version=v4
+
+
+
+
+
+layui��ܲ���
+
+//���ȡɫ�����ַ�����
+ function bg1(){
+             return '#'+Math.floor(Math.random()*256).toString(10);
+         }
+         function bg2(){
+             return '#'+Math.floor(Math.random()*0xffffff).toString(16);
+         }
+         function bg3(){
+             let r=Math.floor(Math.random()*256);
+             let g=Math.floor(Math.random()*256);
+             let b=Math.floor(Math.random()*256);
+             return "rgb("+r+','+g+','+b+")";//���з�����ƴ�Ӷ�������ES6������`�����ַ���{$������}`�滻
+         }
+
+react  ���İ�
+http://react.css88.com/docs/getting-started.html
+
+
+递归函数
+一个汉字是2个字节，一个字母是一个字节
+function flattenArray(arr) {
+
+            const flattened = [].concat(...arr);
+
+            return flattened.some(item => Array.isArray(item)) ?
+
+                flattenArray(flattened) : flattened;
+        }
+
+        const arr = [11, [22, [44, 66], 33], [44, [55, 66, [77, [88]], 99]]];
+        // console.log(...arr)
+        const flatArr = flattenArray(arr);
+        console.log(flatArr)
+按指定的字节截取字符串
+function cutStr(str,L){    
+    let result = '',
+        strlen = str.length, // 字符串长度
+        chrlen = str.replace(/[^\x00-\xff]/g,'**').length; // 字节长度
+
+    if(chrlen<=L){return str;}
+    
+    for(let i=0,j=0;i<strlen;i++){
+        let chr = str.charAt(i);
+        if(/[\x00-\xff]/.test(chr)){
+            j++; // ascii码为0-255，一个字符就是一个字节的长度
+        }else{
+            j+=2; // ascii码为0-255以外，一个字符就是两个字节的长度
+        }
+        if(j<=L){ // 当加上当前字符以后，如果总字节长度小于等于L，则将当前字符真实的+在result后
+            result += chr;
+        }else{ // 反之则说明result已经是不拆分字符的情况下最接近L的值了，直接返回
+            return result;
+        }
+    }
+}
+console.log(cutStr("各种可视化工具以及原生的方法结合而成的效果图",10));
+console.log(cutStr("abcdefghigklmn",10));
+
+、、、、、、、、、、D3文字跳动
+
+https://bl.ocks.org/mbostock/3808218
+https://bl.ocks.org/mbostock/3808234
+https://bl.ocks.org/mbostock/3808221
+
+//三维地图
+Cesium

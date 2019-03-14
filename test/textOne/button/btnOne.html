@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+.chooseBtn {
+            display: none;
+        }
+
+        .choose-label {
+            box-shadow: #ccc 0px 0px 0px 1px;
+            width: 40px;
+            height: 20px;
+            display: inline-block;
+            border-radius: 20px;
+            position: relative;
+            background-color: #bdbdbd;
+            background: #00676b;
+            overflow: hidden;
+        }
+
+        .choose-label:before {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            border-radius: 20px;
+            background-color: aqua;
+            z-index: 20;
+            -webkit-transition: all 0.5s;
+            transition: all 0.5s;
+        }
+
+        .chooseBtn:checked + label.choose-label:before {
+            left: 20px;
+        }
+
+        .chooseBtn:checked + label.choose-label {
+            background-color: #51ccee;
+        }
+
+	</style>
+</head>
+<body>
+	<input type="checkbox" name="sex" id="male" class="chooseBtn" />
+	<label for="male" class="choose-label"></label>
+	<script>
+	console.log(Math.max(),Math.min())
+	</script>
+</body>
+</html>

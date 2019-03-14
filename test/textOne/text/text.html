@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    html,
+    body {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: navy;
+    }
+
+    :root {
+      --color1: yellow;
+      --color2: #FFCC00;
+      --color3: #FF9933;
+      --color4: #FFFF33;
+    }
+
+    #grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      transform: rotate(45deg);
+    }
+
+    #grid span {
+      border-width: 50px;
+      border-style: solid;
+      border-color: let(--color1) let(--color2) let(--color3) let(--color4);
+    }
+
+    #grid span:first-child {
+      border-color: transparent let(--color2) let(--color3) transparent;
+    }
+
+    #grid span:not(:first-child) {
+      animation: animate 2s linear infinite;
+    }
+
+    @keyframes animate {
+      0% {
+        border-color: let(--color1) let(--color2) let(--color3) let(--color4);
+      }
+
+      25% {
+        border-color: let(--color4) let(--color1) let(--color2) let(--color3);
+      }
+
+      50% {
+        border-color: let(--color3) let(--color4) let(--color1) let(--color2);
+      }
+
+      75% {
+        border-color: let(--color2) let(--color3) let(--color4) let(--color1);
+      }
+
+      100% {
+        border-color: let(--color1) let(--color2) let(--color3) let(--color4);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="grid">
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</body>
+
+</html>

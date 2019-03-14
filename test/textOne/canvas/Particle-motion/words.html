@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Martrix</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        #word {
+            display: block;
+            transform: rotate(90deg)
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas id="canvas" style="background:#373672;"></canvas>
+
+    <script> 
+        window.onload = function () {
+            let canvas = document.querySelector('canvas'),
+                context = canvas.getContext('2d'),
+                w, h;
+            w = canvas.width = 907;
+            h = canvas.height = 869;
+            //初始化 
+            // let my_gradient = context.createLinearGradient(0, 0, 0, 170);
+            // my_gradient.addColorStop(0, "red");
+            // my_gradient.addColorStop(1, "yellow");
+            let clearColor = 'rgba(17, 40, 103, .1)', //用于绘制渐变阴影
+                words = ('0010000101010101001').split('')
+            //将文字拆分进一个数组 
+            font_size = 36,  //字体大小 
+                columns = Math.floor(w / font_size), //文字降落的列数 
+                console.log(columns)
+            drops = [];
+            for (let i = 0; i < columns; i++) {
+                drops[i] = 1;
+            }
+            // console.log(drops)
+            function draw() {
+
+                context.fillStyle = "rgba(0, 0, 0, 0.05)";
+                context.fillRect(0, 0, canvas.width, canvas.height);
+
+                context.fillStyle = "rgba(227, 233, 242, .1)";  //文字颜色
+                context.font = font_size + "px arial";
+
+                //逐行输出文字
+                for (var i = 0; i < drops.length; i++) {
+                    //随机输出文字
+                    var text = words[Math.floor(Math.random() * words.length)];
+                    //输出文字，坐标重新计算
+                    context.fillText(text, i * font_size, drops[i] * font_size);
+
+                    //如果绘满一页或者随机数超过0.9则重新绘制
+                    if (drops[i] * font_size > canvas.height || Math.random() > 0.9) {
+                        drops[i] = 0;
+                    }
+                    drops[i]++;
+                }
+            }
+
+
+            //动画循环 
+            // (function drawFrame() {
+            //     window.requestAnimationFrame(drawFrame, canvas);
+            //     context.fillStyle = clearColor;
+            //     context.fillRect(0, 0, w, h);
+            //     draw();
+            // }())
+            setInterval(function () {
+                context.fillStyle = clearColor;
+                context.fillRect(0, 0, w, h);
+
+                draw();
+            }, 50)
+            resize
+            function resize() {
+                w = canvas.width = window.innerWidth;
+                h = canvas.height = window.innerHeight;
+            }
+            canvas.addEventListener("resize", resize);
+        }
+
+    </script>
+
+</body>
+
+</html>

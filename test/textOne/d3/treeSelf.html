@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='treeDom'></div>
+
+  <script src='./d3.v4.min.js'></script>
+
+  <script>
+    let treeDom = document.getElementById('treeDom');
+    let width = 850, height = 800;
+    let marge = { top: 50, bottom: 0, left: 10, right: 0 };
+    var dataset = {
+      name: "中国",
+      children: [
+        {
+          name: "浙江",
+          children: [
+            { name: "杭州", value: 100 },
+            { name: "宁波", value: 100 },
+            { name: "温州", value: 100 },
+            { name: "绍兴", value: 100 }
+          ]
+        },
+        {
+          name: "广西",
+          children: [
+            {
+              name: "桂林",
+              children: [
+                { name: "秀峰区", value: 100 },
+                { name: "叠彩区", value: 100 },
+                { name: "象山区", value: 100 },
+                { name: "七星区", value: 100 }
+              ]
+            },
+            { name: "南宁", value: 100 },
+            { name: "柳州", value: 100 },
+            { name: "防城港", value: 100 }
+          ]
+        },
+        {
+          name: "黑龙江",
+          children: [
+            { name: "哈尔滨", value: 100 },
+            { name: "齐齐哈尔", value: 100 },
+            { name: "牡丹江", value: 100 },
+            { name: "大庆", value: 100 }
+          ]
+        },
+        {
+          name: "新疆",
+          children:
+            [
+              { name: "乌鲁木齐" },
+              { name: "克拉玛依" },
+              { name: "吐鲁番" },
+              { name: "哈密" }
+            ]
+        }
+      ]
+    };
+    let svg = d3.select(treeDom).append('svg')
+      .attr('width', width)
+      .attr('height', height)
+    let g = svg.append('g')
+      .attr('transform', `translate(${marge.top} ${marge.left})`)
+    //创建层级
+    let hierarchyData = d3.hierarchy(dataset)
+      .sum(function (d) {
+        return d.value
+      })
+    //转换数据
+    let tree = d3.tree()
+      .size([width - 100, height - 100])
+      .separation(function (a, b) {
+        return (a.parent == b.parent ? 1 : 2) / a.depth
+      })
+    //节点
+    let treeData = tree(hierarchyData);
+    let nodes = treeData.descendants();
+    let links = treeData.links();
+    // 创建一个贝塞尔生成曲线生成器s
+    let Bézier_curve_generator = d3.linkHorizontal()
+      .x(function (d) { return d.y; })
+      .y(function (d) { return d.x; });
+    //绘制
+    g.append('g')
+      .selectAll('path')
+      .data(links)
+      .enter()
+      .append('path')
+      .attr('d', function (d) {
+        var start = { x: d.source.x, y: d.source.y };
+        var end = { x: d.target.x, y: d.target.y };
+        return Bézier_curve_generator({ source: start, target: end });
+      })
+      .attr('fill', 'none')
+      .attr('stroke', 'blue')
+      .attr('stroke-width', 1)
+    //绘制节点
+    let gg = g.append('g')
+      .selectAll('g')
+      .data(nodes)
+      .enter()
+      .append('g')
+      .attr('transform', function (d) {
+        return `translate(${d.y} ${d.x})`
+      })
+    // //绘制节点跟文字
+    gg.append('circle')
+      .attr('r', 4)
+      .attr('fill', 'none')
+      .attr('stroke', 'pink')
+      .attr('stroke-width', 2)
+
+    gg.append("text")
+      .attr("x", function (d) {
+        return d.children ? -50 : 8;
+      })
+      .attr("y", -5)
+      .attr("dy", 10)
+      .text(function (d) {
+        return d.data.name;
+      })
+
+  // </script>
+</body>
+
+</html>

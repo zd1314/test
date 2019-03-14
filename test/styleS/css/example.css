@@ -1,0 +1,487 @@
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 29.5111px;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+.bg {
+    min-height: 550px;
+    min-width: 1000px;
+    background: #464853 url('../img/bg-container-b19993e.png') repeat-x;
+}
+
+.space {
+    width: 3840px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    background: url('../img/bg-space-6e69cd1.png') repeat-x;
+    transform: translate3d(0, 0, 0);
+    animation: moving 450s linear 0.8s infinite normal none;
+}
+
+@keyframes moving {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        transform: translate3d(-50%, 0, 0);
+    }
+}
+
+.auroras {
+    width: 1550px;
+    height: 850px;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    margin-left: -775px;
+    z-index: 2;
+}
+
+.aurora {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+@keyframes aurora {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 0, 0);
+    }
+    14% {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+    28% {
+        opacity: 0;
+        transform: translate3d(0, 0, 0);
+    }
+    100% {
+        opacity: 0;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.aurora-1 {
+    transform: translate3d(0, 0, 0);
+    background: url("../img/bg-aurora-1.png") no-repeat;
+    background-size: 100% auto;
+    animation: aurora 7s linear 0.2s infinite normal none;
+}
+
+.aurora-2 {
+    transform: translate3d(0, 0, 0);
+    background: url("../img/bg-aurora-2.png") no-repeat;
+    background-size: 100% auto;
+    animation: aurora 7s linear 0.7s infinite normal none;
+}
+
+.aurora-3 {
+    transform: translate3d(0, 0, 0);
+    background: url("../img/bg-aurora-3.png") no-repeat;
+    background-size: 100% auto;
+    animation: aurora 7s linear 1.2s infinite normal none;
+}
+
+.aurora-4 {
+    transform: translate3d(0, 0, 0);
+    background: url("../img/bg-aurora-4.png") no-repeat;
+    background-size: 100% auto;
+    animation: aurora 7s linear 1.7s infinite normal none;
+}
+
+.aurora-5 {
+    transform: translate3d(0, 0, 0);
+    background: url("../img/bg-aurora-5.png") no-repeat;
+    background-size: 100% auto;
+    animation: aurora 7s linear 2.2s infinite normal none;
+}
+
+.aurora-6 {
+    transform: translate3d(0, 0, 0);
+    background: url("../img/bg-aurora-4.png") no-repeat;
+    background-size: 100% auto;
+    animation: aurora 7s linear 2.7s infinite normal none;
+}
+
+.aurora-7 {
+    transform: translate3d(0, 0, 0);
+    background: url("../img/bg-aurora-3.png") no-repeat;
+    background-size: 100% auto;
+    animation: aurora 7s linear 3.2s infinite normal none;
+}
+
+.aurora-8 {
+    transform: translate3d(0, 0, 0);
+    background: url("../img/bg-aurora-2.png") no-repeat;
+    background-size: 100% auto;
+    animation: aurora 7s linear 3.7s infinite normal none;
+}
+
+.aurora-9 {
+    transform: translate3d(0, 0, 0);
+    background: url("../img/bg-aurora-1.png") no-repeat;
+    background-size: 100% auto;
+    animation: aurora 7s linear 4.2s infinite normal none;
+}
+
+.aurora-10 {
+    transform: translate3d(0, 0, 0);
+    background: url("../img/bg-aurora-2.png") no-repeat;
+    background-size: 100% auto;
+    animation: aurora 7s linear 4.7s infinite normal none;
+}
+
+.aurora-11 {
+    transform: translate3d(0, 0, 0);
+    background: url("../img/bg-aurora-3.png") no-repeat;
+    background-size: 100% auto;
+    animation: aurora 7s linear 5.2s infinite normal none;
+}
+
+.aurora-12 {
+    transform: translate3d(0, 0, 0);
+    background: url("../img/bg-aurora-4.png") no-repeat;
+    background-size: 100% auto;
+    animation: aurora 7s linear 5.7s infinite normal none;
+}
+
+.aurora-13 {
+    transform: translate3d(0, 0, 0);
+    background: url("../img/bg-aurora-3.png") no-repeat;
+    background-size: 100% auto;
+    animation: aurora 7s linear 6.2s infinite normal none;
+}
+
+.aurora-14 {
+    transform: translate3d(0, 0, 0);
+    background: url("../img/bg-aurora-2.png") no-repeat;
+    background-size: 100% auto;
+    animation: aurora 7s linear 6.7s infinite normal none;
+}
+
+.mountains {
+    width: 100%;
+    height: 500px;
+    overflow: hidden;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    /*transition: opacity 0.2s linear 0s;*/
+    transform-origin: center top;
+    animation: mountains-in 0.8s ease-out 0s 1 normal forwards;
+}
+
+@keyframes mountains-in {
+    0% {
+        transform: scale(1.5);
+    }
+    0% {
+        transform: scale(1);
+    }
+}
+
+.mountain {
+    width: 4000px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.mountain-1 {
+    height: 336px;
+    z-index: 3;
+    background: url('../img/bg-mountain-1-11661c6.png') repeat-x;
+    background-size: 100% auto;
+    transform: translate3d(0, 0, 0);
+    animation: moving 100s linear 0.8s infinite normal none;
+}
+
+.mountain-2 {
+    height: 384px;
+    z-index: 2;
+    background: url('../img/bg-mountain-2-f8a4360.png') repeat-x;
+    background-size: 100% auto;
+    transform: translate3d(0, 0, 0);
+    animation: moving 160s linear 0.8s infinite normal none;
+}
+
+.mountain-3 {
+    height: 500px;
+    z-index: 1;
+    background: url('../img/bg-mountain-3-54c28fd.png') repeat-x;
+    background-size: 100% auto;
+    transform: translate3d(0, 0, 0);
+    animation: moving 360s linear 0.8s infinite normal none;
+}
+
+.bear {
+    width: 6.25em;
+    height: 3.125em;
+    position: absolute;
+    left: 50%;
+    bottom: 40px;
+    margin-left: -3.125em;
+    background: url("../img/bear-25676f9.png") 0 0 no-repeat;
+    background-size: 50em 100%;
+    z-index: 100;
+    animation: bear-run-in 3.6s step-end 0.6s 1 normal forwards,
+               bear-run 0.8s steps(8) 4.2s infinite normal forwards;
+}
+
+
+/*steps 函数指定了一个阶跃函数*/
+
+/*第一个参数指定了时间函数中的间隔数量（必须是正整数）*/
+
+/*第二个参数可选，接受 start 和 end 两个值，指定在每个间隔的起点或是终点发生阶跃变化，默认为 end。*/
+
+/*step-start等同于steps(1,start)，动画分成1步，动画执行时为开始左侧端点的部分为开始；*/
+
+/*step-end等同于steps(1,end)：动画分成一步，动画执行时以结尾端点为开始，默认值为end。*/
+
+
+@keyframes bear-run-in {
+    0% {
+        background-position: 0em 0;
+        left: -4%;
+    }
+    1.38888889% {
+        background-position: -6.25em 0;
+        left: -2.25%;
+    }
+    2.77777778% {
+        background-position: -12.5em 0;
+        left: -0.5%;
+    }
+    4.16666667% {
+        background-position: -18.75em 0;
+        left: 1.25%;
+    }
+    5.55555556% {
+        background-position: -25em 0;
+        left: 3%;
+    }
+    6.94444444% {
+        background-position: -31.25em 0;
+        left: 4.75%;
+    }
+    8.33333333% {
+        background-position: -37.5em 0;
+        left: 6.5%;
+    }
+    9.72222222% {
+        background-position: -43.75em 0;
+        left: 8.25%;
+    }
+    11.11111111% {
+        background-position: -50em 0;
+        left: 10%;
+    }
+    11.11111111% {
+        background-position: 0em 0;
+        left: 10%;
+    }
+    12.77777778% {
+        background-position: -6.25em 0;
+        left: 11.5%;
+    }
+    14.44444444% {
+        background-position: -12.5em 0;
+        left: 13%;
+    }
+    16.11111111% {
+        background-position: -18.75em 0;
+        left: 14.5%;
+    }
+    17.77777778% {
+        background-position: -25em 0;
+        left: 16%;
+    }
+    19.44444444% {
+        background-position: -31.25em 0;
+        left: 17.5%;
+    }
+    21.11111111% {
+        background-position: -37.5em 0;
+        left: 19%;
+    }
+    22.77777778% {
+        background-position: -43.75em 0;
+        left: 20.5%;
+    }
+    24.44444444% {
+        background-position: -50em 0;
+        left: 22%;
+    }
+    24.44444444% {
+        background-position: 0em 0;
+        left: 22%;
+    }
+    26.38888889% {
+        background-position: -6.25em 0;
+        left: 23.25%;
+    }
+    28.33333333% {
+        background-position: -12.5em 0;
+        left: 24.5%;
+    }
+    30.27777778% {
+        background-position: -18.75em 0;
+        left: 25.75%;
+    }
+    32.22222222% {
+        background-position: -25em 0;
+        left: 27%;
+    }
+    34.16666667% {
+        background-position: -31.25em 0;
+        left: 28.25%;
+    }
+    36.11111111% {
+        background-position: -37.5em 0;
+        left: 29.5%;
+    }
+    38.05555556% {
+        background-position: -43.75em 0;
+        left: 30.75%;
+    }
+    40% {
+        background-position: -50em 0;
+        left: 32%;
+    }
+    40% {
+        background-position: 0em 0;
+        left: 32%;
+    }
+    42.22222222% {
+        background-position: -6.25em 0;
+        left: 33%;
+    }
+    44.44444444% {
+        background-position: -12.5em 0;
+        left: 34%;
+    }
+    46.66666667% {
+        background-position: -18.75em 0;
+        left: 35%;
+    }
+    48.88888889% {
+        background-position: -25em 0;
+        left: 36%;
+    }
+    51.11111111% {
+        background-position: -31.25em 0;
+        left: 37%;
+    }
+    53.33333333% {
+        background-position: -37.5em 0;
+        left: 38%;
+    }
+    55.55555556% {
+        background-position: -43.75em 0;
+        left: 39%;
+    }
+    57.77777778% {
+        background-position: -50em 0;
+        left: 40%;
+    }
+    57.77777778% {
+        background-position: 0em 0;
+        left: 40%;
+    }
+    60.27777778% {
+        background-position: -6.25em 0;
+        left: 40.75%;
+    }
+    62.77777778% {
+        background-position: -12.5em 0;
+        left: 41.5%;
+    }
+    65.27777778% {
+        background-position: -18.75em 0;
+        left: 42.25%;
+    }
+    67.77777778% {
+        background-position: -25em 0;
+        left: 43%;
+    }
+    70.27777778% {
+        background-position: -31.25em 0;
+        left: 43.75%;
+    }
+    72.77777778% {
+        background-position: -37.5em 0;
+        left: 44.5%;
+    }
+    75.27777778% {
+        background-position: -43.75em 0;
+        left: 45.25%;
+    }
+    77.77777778% {
+        background-position: -50em 0;
+        left: 46%;
+    }
+    77.77777778% {
+        background-position: 0em 0;
+        left: 46%;
+    }
+    80.55555556% {
+        background-position: -6.25em 0;
+        left: 46.5%;
+    }
+    83.33333333% {
+        background-position: -12.5em 0;
+        left: 47%;
+    }
+    86.11111111% {
+        background-position: -18.75em 0;
+        left: 47.5%;
+    }
+    88.88888889% {
+        background-position: -25em 0;
+        left: 48%;
+    }
+    91.66666667% {
+        background-position: -31.25em 0;
+        left: 48.5%;
+    }
+    94.44444444% {
+        background-position: -37.5em 0;
+        left: 49%;
+    }
+    97.22222222% {
+        background-position: -43.75em 0;
+        left: 49.5%;
+    }
+    100% {
+        background-position: -50em 0;
+        left: 50%;
+    }
+}
+
+@keyframes bear-run {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: -50em 0;
+    }
+}

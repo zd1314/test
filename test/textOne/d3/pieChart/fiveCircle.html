@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>环形图</title>
+  <style>
+    body {
+      background: black
+    }
+
+    .tooltip {
+      width: 150px;
+      height: 50px;
+      border: 3px solid blueviolet;
+      position: absolute;
+      left: 45px;
+      top: 40px;
+      font-size: 16px;
+      color: #fff;
+      padding-left: 20px;
+      box-sizing: border-box
+    }
+  </style>
+</head>
+
+<body>
+  <div id='arc'></div>
+  <div class="tooltip">
+    <span>1号</span><br />
+    <span style='color:darkgray'>80%</span>
+  </div>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+</body>
+<script>
+  let tooltip = document.querySelector('.tooltip');
+  let content = tooltip.getElementsByTagName('span')
+  let me = this;
+  let dom = document.getElementById('arc')
+  let w = 800, h = 800;
+  let M = Math.PI;
+  let startAgle = 0;
+  let endAgle = (3 / 2 * Math.PI);
+  let r = 70, R = 80;
+  let colorStart = ['#EE5C42', 'gold', '#9AFF9A', '#7B68EE', '#8B1A1A'].reverse()
+  let colorEnd = ['#EE4000', 'orange', '#9ACD32', '#7AC5CD', '#8B008B'].reverse()
+  let data = [
+    {
+      name: '社会保险', value: '80'
+    },
+    { name: '金融保险', value: '60' },
+    { name: '失业保险', value: '52' },
+    { name: '生育保险', value: '20' },
+    { name: '人身保险', value: '10' }
+  ]
+  //ar函数
+  let _createArc = ((r, R, start, end) => {
+    let arc = d3.arc()
+      .innerRadius(r)
+      .outerRadius(R)
+      .startAngle(start)
+      .endAngle(end)
+      .cornerRadius([30])
+    return arc();
+  })
+  let pie = d3.pie()
+    .value(function (d) { return d.value })
+  let pieData = pie(data)
+  let svg = d3.select(dom).append('svg')
+    .attr('width', w)
+    .attr('height', h);
+  //渐变
+  let linears = svg.append('defs').selectAll('linearGradient').data(colorStart).enter()
+    .append("linearGradient")
+    .attr("id", function (d, i) {
+      return `row-svg-color${i}`;
+    })
+    .attr("x1", "0%")
+    .attr("y1", "0%")
+    .attr("x2", "100%")
+    .attr("y2", "0%");
+  linears.append('stop')
+    .attr("offset", `0%`)
+    .style("stop-color", function (d, i) {
+      return colorStart[i];
+    });
+  linears.append('stop')
+    .attr("offset", `100%`)
+    .style("stop-color", function (d, i) {
+      return colorEnd[i];
+    });
+
+  //值域关系
+  let linear = d3.scaleLinear() // 创建线性比例尺
+    .domain([0, 100]) // 定义域
+    .range([endAgle, startAgle]);   // 值域
+
+  let gBig = svg.append('g')
+    .attr('class', 'g-big')
+    .attr('transform', `translate(${w / 4} ${h / 4})`)
+
+  let gSmall = svg.append('g')
+    .attr('class', 'g-small')
+    .attr('transform', `translate(${w / 4} ${h / 4})`)
+  //阴影path
+  let pathBg = gBig.selectAll('path').data(pieData).enter().append('path')
+    .attr('d', function (d, i) {
+      return _createArc(r + (i * 20), R + (i * 20), startAgle, endAgle)
+    })
+    .attr('fill', function (d, i) {
+      return '#ccc'
+    })
+  //根据数据来的path
+  let pathSmall = gSmall.selectAll('path').data(pieData).enter().append('path')
+    .on('mouseover', function (d, i) {
+      content[0].innerHTML = d.data.name;
+      content[1].innerHTML = d.data.value + '%';
+      content[1].style.color = colorStart[i]
+    })
+    .transition()
+    .duration(2000)
+    .attrTween('d', function (d, i) {
+      return function (t) {
+        return _createArc(r + (i * 20), R + (i * 20), 0, linear(d.data.value) * t)
+      }
+    })
+    .attr('fill', function (d, i) {
+      return `url(#row-svg-color${i})`;
+    })
+  let gLegend = svg.append('g').attr('class', 'g-legend')
+  let rect = gLegend.selectAll('rect').data(pieData).enter().append('rect')
+    .attr('width', 20)
+    .attr('height', 5)
+    .attr('x', function (d, i) {
+      return 420
+    })
+    .attr('y', function (d, i) {
+      return 100 + 40 * i
+    })
+    .attr('stroke-width', 1)
+    .attr('fill', function (d, i) {
+      return colorStart[i]
+    })
+  let text = gLegend.selectAll('text').data(pieData).enter().append('text')
+    .text(function (d, i) {
+      return d.data.name
+    })
+    .attr('x', function (d, i) {
+      return 480
+    })
+    .attr('y', function (d, i) {
+      return 105 + 40 * i
+    })
+    .attr('fill', '#fff')
+    .attr('text-anchor', "middle")
+
+
+
+
+
+</script>
+
+</html>

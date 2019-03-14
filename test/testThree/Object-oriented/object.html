@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id='wrap'>333</div>
+  <script>
+    class Point {
+      constructor(x, y) {
+        this.x = x
+        this.y = y
+      }
+      toString() {
+        return this.x + this.y
+      }
+    }
+    let aa = new Point(2, 3)
+    let bb = new Point(3, 5)
+
+    //getter 和setter
+    class Element {
+      constructor(ele) {
+        this.ele = ele;
+      }
+      get num() {
+        return this.ele.innerHTML;
+      }
+      set num(value) {
+        return this.ele.innerHTML = value
+      }
+    }
+    let p1 = new Element(document.getElementById('wrap'))
+    p1.num = 55;
+    console.log(p1.num)
+  </script>
+</body>
+
+</html>

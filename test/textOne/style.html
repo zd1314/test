@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    import React, { Component } from 'react';
+    import * as d3 from 'd3';
+    import './pie-dial.css';
+    const PI = Math.PI;
+
+    class Dial extends Component {
+      constructor(props) {
+        super(props);
+        this.state = {
+          value: this.props.value
+        }
+      }
+
+      _setData(d) {
+        this.setState({
+          value: d
+        });
+      }
+
+      render() {
+        let me = this;
+        return (
+          <div ref={'pieAreaRef'} className={'pie-area'} style={{ width: me.props.width, height: me.props.height, position: 'absolute', top: `calc(50% - ${me.props.width / 2}px)`, left: `calc(50% - ${me.props.height / 2}px)` }}>
+            <div className={'pie-dial-tag'} ref={'pieDialTagRef'} style={{
+              position: 'absolute',
+              background: `url("/static/image/model-chart-tmp-img/pie-dial.png")`,
+              width: 214,
+              height: 228,
+              left: 'calc(50% - 56px)',
+              top: 'calc(50% + 10px)',
+              transform: 'rotate(73deg)',
+              transformOrigin: '56px 56px',
+              transition: 'transform 1s'
+            }}></div>
+            <p className={'pie-dial-value'} >{me.state.value}<span style={{ fontSize: 60 }}>%</span></p>
+          </div>
+        )
+      }
+
+      //生成圆弧
+      createArc(r, R, start, end) {
+        // let r = 60;
+        // let R = 100;
+        let arc = d3.arc()
+          .innerRadius(r)
+          .outerRadius(R)
+          .startAngle(start)
+          .endAngle(end);
+        return arc();
+      }
+
+      //角度
+      rotate(value) {
+        let me = this;
+        let deg = 2.96 * value + 73;
+        me.refs.pieDialTagRef.style.transform = `rotate(${deg}deg)`;
+      }
+
+      componentDidMount() {
+        let me = this;
+        let width = me.props.width || 780;
+        let height = width;
+        let R = 283;
+        let r = R - 30;
+        let tR = R + 20;
+        let scalet = 10;
+        let scaleAngle = PI / 6;
+        let angleFor = -PI + scaleAngle;
+        let angleto = PI - scaleAngle;
+        let colorArr = ['rgba(255,252,0,1)', 'rgba(255,252,0,1)', 'rgba(0,240,253,1)', 'rgba(0,240,253,1)', 'rgba(0,240,253,1)', 'rgba(0,240,253,1)', 'rgba(0,240,253,1)', 'rgba(0,240,253,1)', 'rgba(16,255,143,1)', 'rgba(16,255,143,1)']
+
+        let data = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((s, i) => {
+          let start = angleFor + i * scaleAngle;
+          let end = start + scaleAngle - 2 * PI / 180;
+          return {
+            start,
+            end
+          }
+        });
+
+        let svg = d3.select(me.refs.pieAreaRef).append('svg')
+          .attr('width', width)
+          .attr('height', height);
+
+        let g = svg.selectAll('g')
+          .data(data)
+          .enter()
+          .append('g')
+          .attr('class', function (d) { if (d == 1) { return 'g-2ed' } })
+          .attr('transform', `translate(${width / 2},${height / 2})`);
+
+        me._svg = svg;
+
+        g.append('path')
+          .attr('d', function (d, i) {
+            if (i > 9) { return }
+            let path = me.createArc(r, R, d.start, d.end);
+            return path
+          })
+          .attr('fill', function (d, i) {
+            return colorArr[i]
+          });
+
+        g.append('path')
+          .attr('d', function (d, i) {
+            if (i > 9) { return }
+            let path = me.createArc(tR - 2, tR, d.start, d.end + PI / 90);
+            if (i == 0) {
+              path = me.createArc(tR - 2, tR, d.start - PI / 180, d.end + PI / 180);
+            }
+            if (i == 9) {
+              path = me.createArc(tR - 2, tR, d.start, d.end + PI / 180);
+            }
+            return path
+          })
+          .attr('fill', '#12ffff');
+
+        g.append('line')
+          .attr('x1', function (d, i) {
+            return (tR - 10) * Math.sin(d.start - PI / 180)
+          })
+          .attr('y1', function (d, i) {
+            return -(tR - 10) * Math.cos(d.start - PI / 180)
+          })
+          .attr('x2', function (d, i) {
+            return (tR + 10) * Math.sin(d.start - PI / 180)
+          })
+          .attr('y2', function (d, i) {
+            return -(tR + 10) * Math.cos(d.start - PI / 180)
+          })
+          .attr('stroke-width', '2')
+          .attr('stroke', '#12ffff');
+
+        g.append('text')
+          .attr('dy', function (d, i) {
+            if (i == 5) { return 0 }
+            if (i < 4 || i == 10) { return 20 }
+            return '10'
+          })
+          .attr('dx', function (d, i) {
+            if (i == 0) { return '-20' }
+            if (i == 5) { return '-30' }
+            if (i < 5) { return '-50' }
+
+          })
+          .attr('fill', '#fff')
+          .attr('font-size', 48)
+          .attr('x', function (d, i) {
+            return (tR + 20) * Math.sin(d.start)
+          })
+          .attr('y', function (d, i) {
+            return -(tR + 20) * Math.cos(d.start)
+          })
+          .text(function (d, i) {
+            return i * scalet
+          });
+
+        // me.rotate(me.state.value);
+      }
+
+      appear() {
+        this.rotate(this.state.value);
+      }
+
+      disappear() {
+        this.rotate(0);
+      }
+
+      componentDidUpdate() {
+        let me = this;
+        me.rotate(me.state.value);
+      }
+    };
+
+
+    export default Dial;
+
+
+  </script>
+</body>
+
+</html>

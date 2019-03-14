@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            list-style: none;
+        }
+
+        body {
+            background: url('./img/1.jpg');
+            background-size: cover;
+        }
+
+        .pic {
+            position: relative;
+            transform-style: preserve-3d;
+            animation: moves 10s linear infinite;
+        }
+
+        .pic ul li {
+            width: 240px;
+            height: 240px;
+            transform: rotateY(0deg) translateZ(216px);
+            position: absolute;
+            left: 20px;
+            top: -100px
+        }
+
+
+
+        @keyframes moves {
+            from {
+                transform: rotateY(0deg)
+            }
+
+            to {
+                transform: rotateY(360deg)
+            }
+
+        }
+
+        .top {
+            width: 400px;
+            height: 100px;
+            color: #fff;
+            font-size: 44px;
+            margin: 130px 10px
+        }
+
+        #textWrap {
+            width: 500px;
+            height: 300px;
+            position: absolute;
+            left: 450px;
+            top: 550px
+        }
+
+        pre {
+            white-space: pre-line;
+        }
+
+        #box {
+            width: 310px;
+            height: 310px;
+            margin: auto;
+            perspective: 800px
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top">
+        <marquee behavior="alternate">情人节快乐！</marquee>
+    </div>
+    <div id="box">
+        <div class="pic">
+            <ul>
+                <li style="transform: rotateY(0deg) translateZ(216px)">
+                    <img src="./img/1.png" alt="">
+                </li>
+                <li style="transform: rotateY(60deg) translateZ(216px)">
+                    <img src="./img/2.png" alt="">
+                </li>
+                <li style="transform: rotateY(120deg) translateZ(216px)">
+                    <img src="./img/3.png" alt="">
+                </li>
+                <li style="transform: rotateY(180deg) translateZ(216px)">
+                    <img src="./img/4.png" alt="">
+                </li>
+                <li style="transform: rotateY(240deg) translateZ(216px)">
+                    <img src="./img/5.png" alt="">
+                </li>
+                <li style="transform: rotateY(300deg) translateZ(216px)">
+                    <img src="./img/6.png" alt="">
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="textWrap">
+        <pre id="language_one" style=" color:#F93; font-size:34px;"></pre>
+        <div id="text" style="display: none">
+            执子之手,与子偕老！
+        </div>
+    </div>
+
+    <script>
+        let index = 0;
+        let textOne = document.getElementById('text').innerHTML;
+        function times() {
+            document.getElementById('language_one').innerText = textOne.substring(0, index++)
+        }
+        setInterval(times, 100)
+    </script>
+</body>
+
+</html>

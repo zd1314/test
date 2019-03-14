@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    div {
+      color: blue !important;
+    }
+
+    #spans {
+      color: pink
+    }
+
+    .is.a.b.c.d.e.f.h.l.m.n.o.p.q.r {
+      color: yellow
+    }
+  </style>
+</head>
+
+<body>
+  <div style='color:red'>css重叠样式表</div>
+  <span id='spans' class="is a b c d e f h l m n o p q r s t">kslfskfj</span>
+  <script>
+    //1+++++++++++++++++++++++++++++
+    // var num = 1;
+    // var obj = {
+    //   num: 2,
+    //   fn: (function () {
+    //     this.num *= 2;
+    //     num += 3;
+    //     var num = 1;
+    //     return function () {
+    //       num += 2;
+    //       this.num += 2;
+    //       document.write(++num)
+    //     }
+    //   })()
+    // }
+    // var f = obj.fn;
+    // f();
+    // obj.fn();
+
+    // document.write(window.num, obj.num)
+    // // //
+
+    var num = 2;
+    var obj = {
+      num: 0,
+      fn: function () {
+        num = 5;
+        (function (num) {
+          //console.log(this.num + '&&&&&&&&&&&&')
+          ++this.num;
+          num++;
+          console.log(this.num + '###########')
+        })(this.num)
+      }
+    }
+    obj.fn()
+    console.log(window.num, obj.num)
+
+    //this指向
+    // function fn() {
+    //   this.user = '追梦子';
+    //   return Array;
+    // }
+    // var a = new fn;
+
+    // console.log(a.user);
+    //函数提升//
+    // var a = 3;
+    // // 函数提升a()
+    // function a() {
+    //   console.log(9);
+    // }
+    // a()
+
+
+    // function fn() {
+    //   var a; // 变量提升，函数作用域范围内
+    //   console.log(a);
+    //   a = 'aaa';
+    //   console.log(a);
+    // }
+    // fn();
+    // var o = {
+    //   user: "追梦子",
+    //   fn: function () {
+    //     console.log(this.user);  //追梦子
+    //   }
+    // }
+    // o.fn();
+
+    // function a() {
+    //   var user = "追梦子";
+    //   console.log(this);　　//Window
+    //   console.log(this.user); //undefined
+    // }
+    // window.a();
+
+  </script>
+</body>
+
+</html>

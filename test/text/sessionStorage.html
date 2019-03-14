@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="msg">
+    <input type="button" id="setData" value="保存数据">
+    <input type="button" id="getData" value="获取数据">
+    <input type="button" id="removeData" value="清除数据">
+    <input type="button" id="clearData" value="全部清空">
+    <script>
+        let user = {
+            name: 'zdd',
+            isVIP: 'true',
+            id: '567',
+            arr: [2, 4, 6]
+        }
+        let str = JSON.stringify(user);
+        sessionStorage.setItem('ssionuser', str)
+        let sessionUser = sessionStorage.getItem('ssionuser');
+        let sesson = JSON.parse(sessionUser)
+
+
+
+        window.onload = function () {
+            console.log("当你关闭此页面或者关闭浏览器的时候，sessionStorage中保存的数据才会消失，也就是说重新打开此页面的时候，点击获取数据  ，将不会显示任何数据，刷新页面无效。由此可以证明，sessionStorage的生命周期为，某个用户浏览网站时，从进入到离开的这段时间。");
+            let msg = document.getElementById('msg');
+            let setData = document.getElementById('setData');
+            let getData = document.getElementById('getData');
+            let removeData = document.getElementById('removeData');
+            let clearData = document.getElementById('clearData');
+            setData.onclick = function () {//存入数据
+                if (msg.value) {
+                    sessionStorage.setItem('data', msg.value);
+                    console.log('信息已保存中data字段中');
+                } else {
+                    console.log('信息不能为空')
+                }
+            };
+            getData.onclick = function () {//获取数据
+                let msg = sessionStorage.getItem('data');
+                if (msg) {
+                    console.log('data字段中的值为' + msg);
+                }
+                else {
+                    console.log('data字段无值');
+                }
+            };
+            removeData.onclick = function () {//清除部分选定的数据
+                let msg = sessionStorage.getItem('data');
+                if (msg) {
+                    sessionStorage.removeItem('data');
+                } else {
+                    console.log('data字段中的数值为空')
+                }
+            };
+            clearData.onclick = function () {//清楚全部数据
+                sessionStorage.clear();
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0
+    }
+
+    body {
+      background: #000
+    }
+
+    #wrap {
+      width: 800px;
+      height: 20px;
+      background: #eee;
+      border-radius: 20px;
+      margin: 400px auto;
+      position: relative;
+    }
+
+    #process {
+      width: 20px;
+      height: 20px;
+      background: blue;
+      position: absolute;
+      left: 0;
+    }
+
+    #process-popal {
+      position: absolute;
+      left: 0;
+      top: 0;
+      background: aqua;
+      width: 0;
+      height: 20px;
+      border-radius: 20px 0px 0px 20px
+    }
+
+    #op {
+      color: white;
+      font-size: 16px;
+      position: absolute;
+      top: 50px
+    }
+  </style>
+</head>
+
+<body>
+  <div id="wrap">
+    <div id='process'>
+    </div>
+    <div id='process-popal'></div>
+    <p id='op'></p>
+  </div>
+  <script>
+    let wrap = document.getElementById('wrap')
+    let process = document.getElementById('process')
+    let processPopal = document.getElementById('process-popal');
+    let processText = document.getElementById('process-text');
+    let ptxt = document.getElementById('op')
+    process.onmousedown = function (ev) {
+      let event = window.event || ev;
+      let disX = event.clientX - this.offsetLeft;
+      let that = this;
+      document.onmousemove = function (ev) {
+        let event = window.event || ev;
+        barLeft = event.clientX - disX;
+        if (barLeft < 0) {
+          barLeft = 0
+        }
+        else if (barLeft > wrap.offsetWidth - process.offsetWidth) {
+          barLeft = wrap.offsetWidth - process.offsetWidth
+        }
+        processPopal.style.width = barLeft + 'px';
+        that.style.left = barLeft + 'px';
+        ptxt.innerHTML = parseInt(barLeft / (wrap.offsetWidth - process.offsetWidth) * 100) + "%";
+      }
+    }
+    document.onmouseup = function () {
+      document.onmousemove = null;
+      document.onmouseup = null;
+    }
+  </script>
+</body>
+
+</html>

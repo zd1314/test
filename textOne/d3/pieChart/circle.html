@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    #container {
+      width: 300px;
+      height: 300px;
+      margin: 50px auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div id='container'></div>
+  <script>
+    const DialDOM = React.createClass({
+      getDefaultProps() {
+        return {
+          fontSize: 12,
+          fontFamily: 'inherit',
+          fontColor: 'inherit'
+        };
+      },
+      getInitialState() {
+        // size和fontSize可以改变，所以作为组件的state使用
+        return {
+          size: this.props.size,
+          fontSize: this.props.fontSize
+        };
+      },
+      render() {
+        const _data = this.props.dataset.children;
+        let _Arcs = [];
+        let _total = _data.length;
+        let _average = 2 / _total * Math.PI;
+        // 最大间距不超过5度
+        let _maxGap = 5 * Math.PI / 180;
+        // 实体弧线的跨度
+        let _step = _average * 0.1 > _maxGap ? _average - _maxGap : _average * 0.9;
+        // 旋转负角度
+        let _rotate = _step / 2;
+        // 刻度个数
+        let _ticksum = 20;
+        //刻度弧度
+        let _tickstep = _step / _ticksum;
+        // 标签的字号
+        let _nameFontSize = this.state.fontSize;
+        // 中间文字的主标题字号
+        let _midMainFontSize = this.state.fontSize * 3;
+        // 中间文字的副标题字号
+        let _midSubFontSize = this.state.fontSize;
+        // 中间文字垂直偏移
+        let _mainDy = this.state.fontSize / 10;
+        // 中间文字副标题字号
+        let _subDy = this.state.fontSize * 1.5;
+        if (_data) {
+          for (let i = 0; i < _total; i++) {
+            let _startAngle = _average * i - _rotate;
+            let _endAngle = _startAngle + _step;
+            _Arcs.push(<DialArc radius={this.state.size / 2}
+              dataset={_data[i]}
+              key={i}
+              range={i}
+              startAngle={_startAngle}
+              endAngle={_endAngle}
+              padding='30'
+              border='2'
+              ticksum={_ticksum}
+              tickstep={_tickstep}
+              fontSize={_nameFontSize}
+              fontColor={this.props.fontColor} />);
+          }
+        }
+        let _transform = d3.transform('translate(' + this.state.size / 2 + ',' + this.state.size / 2 + ')');
+        return (
+          <DialBox size={this.state.size} fontSize={this.props.fontSize} fontFamily={this.props.fontFamily} >
+            {_Arcs}
+            <DialMidText
+              finalscore={this.props.dataset.score}
+              rank={this.props.dataset.rank}
+              transform={_transform}
+              mainFontSize={_midMainFontSize}
+              subFontSize={_midSubFontSize}
+              fontColor={this.props.fontColor}
+              mainDy={_mainDy}
+              subDy={_subDy} />
+          </DialBox>
+        );
+      }
+    });
+
+    // 容器dom
+    const DialBox = React.createClass({
+      render() {
+        return (
+          <svg width={this.props.size} height={this.props.size} style={{
+            fontSize: this.props.fontSize,
+            fontFamily: this.props.fontFamily
+          }}>
+            {this.props.children}
+          </svg>
+        );
+      }
+    });
+    // 表盘外围圆弧
+    const DialArc = React.createClass({
+      getInitialState() {
+        return {
+          pathArc: '',
+          arcID: 'arc_' + this.props.range + (new Date()).getTime()
+        };
+      },
+      componentDidMount() {
+        let _arcAniTime = 600,
+          _textAniTime = 300,
+          _tickAniTime = 50;
+        // path动画
+        let _endAngle = this.props.endAngle;
+        let _arc = d3.svg.arc().innerRadius(this.props.radius - this.props.padding - this.props.border).outerRadius(this.props.radius - this.props.padding).startAngle(this.props.startAngle);
+        let path = d3.select(this.refs.path);
+        path.datum({ endAngle: this.props.startAngle });
+        path.transition().duration(_arcAniTime).attrTween('d', function (d) {
+          let interpolate = d3.interpolate(d.endAngle, _endAngle);
+          return function (t) {
+            d.endAngle = interpolate(t);
+            return _arc(d);
+          }
+        });
+        //text动画
+        let text = d3.select(this.refs.text);
+        text.transition().delay(_arcAniTime).duration(_textAniTime).style('opacity', '1');
+        // tick动画
+        for (let i = 0; i < 20; i++) {
+          d3.select(React.findDOMNode(this.refs['tick_' + i])).transition().delay(30 * i).duration(30).style('opacity', 0.4);
+        }
+        let score_ticks_num = Math.floor(this.props.dataset.score * this.props.ticksum / 100);
+        for (let i = 0; i < score_ticks_num; i++) {
+          d3.select(React.findDOMNode(this.refs['tick_' + i])).transition().delay(_arcAniTime + _textAniTime + _tickAniTime * i).duration(_tickAniTime).style('opacity', 1);
+        }
+      },
+      render() {
+        let _arc = d3.svg.arc().innerRadius(this.props.radius - this.props.padding - this.props.border).outerRadius(this.props.radius - this.props.padding).startAngle(this.props.startAngle).endAngle(this.props.endAngle);
+        let _transform = d3.transform('translate(' + this.props.radius + ',' + this.props.radius + ')');
+        let ticks = [];
+        for (let i = 0; i < this.props.ticksum; i++) {
+          let _ref = 'tick_' + i;
+          ticks.push(<DialTick startAngle={this.props.startAngle + this.props.tickstep * i}
+            endAngle={this.props.startAngle + this.props.tickstep * (i + 2 / 3)}
+            radius={this.props.radius - this.props.padding - this.props.border}
+            color={this.props.dataset.color}
+            key={i}
+            ref={_ref} />);
+        }
+        return (<g transform={_transform}>
+          <path ref='path'
+            id={this.state.arcID}
+            d={_arc()}
+            fill={this.props.dataset.color}> </path>
+          <text ref='text' dx='50%' dy='-10px' textAnchor='end' style={{
+            opacity: 0,
+            fontSize: this.props.fontSize
+          }}
+            fill={this.props.fontColor}>
+            <textPath xlinkHref={'#' + this.state.arcID}>{this.props.dataset.name}</textPath>
+          </text>
+          {ticks}
+        </g>
+        );
+      }
+    });
+
+    // 时刻小圆弧
+    const DialTick = React.createClass({
+      render() {
+        let _arc = d3.svg.arc().innerRadius(this.props.radius - 15).outerRadius(this.props.radius - 5).startAngle(this.props.startAngle).endAngle(this.props.endAngle);
+        return (
+          <g style={{ opacity: 0 }}>
+            <path ref='tickpath'
+              d={_arc()}
+              fill={this.props.color}
+            ></path>
+          </g>
+        );
+      }
+    });
+    // 中心文字
+    const DialMidText = React.createClass({
+      render() {
+        let _rankText = '超越了全国' + this.props.rank + '的团队';
+        let _rankTextTransform = d3.transform('scale(0.1)');
+        return (
+          <g transform={this.props.transform} >
+            <text style={{
+              fontSize: this.props.mainFontSize
+            }} textAnchor='middle' y={this.props.mainDy} fill={this.props.fontColor}>{this.props.finalscore}</text>
+            <text style={{
+              fontSize: this.props.subFontSize
+            }} textAnchor='middle' y={this.props.subDy} fill={this.props.fontColor} >{_rankText}</text>
+          </g>
+        );
+      }
+    });
+    // default configurations
+    const default_conf = {};
+
+    /**
+     * @desc 入口函数
+     * @param container-{DOM Element}: chart外层容器，一般由模板指定
+     * @param opts-{Object}: 数据和配置选型的集合对象
+     * @return chart实例-{React Object}
+     **/
+    class Dial {
+      constructor(container, opts) {
+        this.container = container;
+        this.conf = Object.assign({}, default_conf, opts && opts.conf);
+        this.dataset = Object.assign({}, opts && opts.dataset);
+        this.DOM = null;
+        this.init();
+      }
+      init() {
+        let _size = this.conf.size || parseInt(d3.select(this.container).style('width'));
+        let _fontSize, _fontFamily;
+        if (this.conf.fontSize) {
+          _fontSize = this.conf.fontSize || 12;
+        }
+        if (this.conf.fontFamily) {
+          _fontFamily = this.conf.fontFamily || 'yahei,sans-serif';
+        }
+        this.DOM = React.render(
+          <DialDOM size={_size} fontSize={_fontSize} fontFamily={_fontFamily} dataset={this.dataset} />, this.container
+        );
+      }
+      /**
+       * @desc 更新组件的state，可用于响应式
+       * @param opts-{Object}: 配置参数
+       **/
+      update(opts) {
+        if (!opts) {
+          return;
+        }
+        if (opts.fontSize) {
+          this.DOM.setState({
+            fontSize: opts.fontSize
+          });
+        }
+        if (opts.size) {
+          this.DOM.setState({
+            size: opts.size
+          });
+        }
+      }
+    }
+
+    // 测试数据
+    var mockData = {
+      name: '团队效率评估',
+      score: 80,
+      rank: '34%',
+      children: [{
+        name: '组织效率',
+        score: 80,
+        color: '#4CAF50'
+      }, {
+        name: '沟通效率',
+        score: 60,
+        color: '#E91E63'
+      }, {
+        name: '协作效率',
+        score: 100,
+        color: '#FFEB3B'
+      }]
+    };
+    var dial = new Dial(document.getElementById("container"), {
+      conf: {
+        size: 300,
+        fontSize: 18,
+        fontFamily: 'yahei,sans-serif',
+        fontColor: '#fff',
+        responsive: false
+      },
+      dataset: mockData
+    });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .box3 {
+      width: 10px;
+      height: 10px;
+      background-color: red;
+      position: absolute;
+    }
+
+    .box2 {
+      width: 400px;
+      height: 200px;
+      border-radius: 200px / 100px;
+      border: 3px solid #000;
+      position: absolute;
+      left: 300px;
+      top: 400px;
+    }
+
+    .box3 {
+      animation: ani-fragment 5s infinite;
+    }
+
+    @keyframes ani-fragment {
+      0% {
+        left: 690.2113032590307px;
+        top: 530.9016994374947px;
+      }
+      5% {
+        left: 661.8033988749895px;
+        top: 558.7785252292473px;
+      }
+      10% {
+        left: 617.5570504584946px;
+        top: 580.9016994374947px
+      }
+      15% {
+        left: 561.8033988749895px;
+        top: 595.1056516295154px
+      }
+      20% {
+        left: 500px;
+        top: 600px
+      }
+      25% {
+        left: 438.19660112501055px;
+        top: 595.1056516295154px
+      }
+      30% {
+        left: 382.4429495415054px;
+        top: 580.9016994374947px
+      }
+      35% {
+        left: 338.19660112501055px;
+        top: 558.7785252292473px
+      }
+      40% {
+        left: 309.78869674096927px;
+        top: 530.9016994374947px
+      }
+      45% {
+        left: 300px;
+        top: 500px
+      }
+      50% {
+        left: 309.78869674096927px;
+        top: 469.0983005625053px
+      }
+      55% {
+        left: 338.1966011250105px;
+        top: 441.2214747707527px
+      }
+      60% {
+        left: 382.44294954150536px;
+        top: 419.0983005625053px
+      }
+      65% {
+        left: 438.1966011250105px;
+        top: 404.89434837048464px
+      }
+      70% {
+        left: 499.99999999999994px;
+        top: 400px
+      }
+      75% {
+        left: 561.8033988749894px;
+        top: 404.89434837048464px
+      }
+      80% {
+        left: 617.5570504584946px;
+        top: 419.09830056250524px
+      }
+      85% {
+        left: 661.8033988749894px;
+        top: 441.22147477075265px
+      }
+      90% {
+        left: 690.2113032590307px;
+        top: 469.09830056250524px
+      }
+      95% {
+        left: 700px;
+        top: 500px
+      }
+      100% {
+        left: 690.2113032590307px;
+        top: 530.9016994374947px
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="box3"></div>
+<div class="box2"></div>
+<script>
+  //圆心 x、y 、r半径   2*Math.PI / 360 ---- 1弧度
+  let box3 = document.querySelector('.box3');
+
+  let path_length = 200;   //定义路径的半长轴的长度
+  let path_width = 100;    //定义路径的半短轴的长度
+  let path_angel = 0;     //初始化角度为0
+  let coordiX = 500, coordiY = 500;
+
+  //  (function draw1() {
+  //    path_angel++;
+  //    if (path_angel >= 360) {
+  //      path_angel = 0;
+  //    }
+  //    let hudu = (2 * Math.PI / 360) * (path_angel);
+  //    box3.style.left = path_length * Math.cos(hudu) + coordiX + 'px';
+  //    box3.style.top = path_width * Math.sin(hudu) + coordiY + 'px';
+  //    requestAnimationFrame(draw1)
+  //  })();
+
+  const createFrame = () => {
+    let frame = '';
+    let left = 0;
+    let top = 0;
+    let num = 21;
+    for (let i = 0; i < num; i++) {
+      path_angel += 18;
+      if (path_angel >= 360) {
+        path_angel = 0;
+      }
+      let hudu = (2 * Math.PI / 360) * (path_angel);
+      left = path_length * Math.cos(hudu) + coordiX + 'px';
+      top = path_width * Math.sin(hudu) + coordiY + 'px';
+      frame += `${i * 5}%{ left: ${left}; \n top:${top}}\n`;
+    }
+    return frame;
+  };
+
+  let keyframes = `@keyframes ani-fragment {\n${createFrame()}}`;
+
+  console.log(keyframes);
+
+
+  //cancelAnimationFrame(timer);
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>数学代数</title>
+  <style>
+    #box {
+      width: 200px;
+      height: 150px;
+      background: rgba(123, 223, 105, 0.3);
+      padding-top: 250px;
+      transform-style: preserve-3d;
+      transform: translateY(-90px) rotateY(30deg);
+      margin: 0 auto
+    }
+  </style>
+</head>
+
+<body>
+  <div id='box'></div>
+  <!-- 声明 40<A<60, 20<B<80,30<C<70 且 A + B+C == 150;如何随机生成A和B? -->
+  <!-- 声明 40<A<60, 20<B<80 且 A + B == 100;如何随机生成A和B? -->
+  <script>
+    function random(max, min) {
+      return Math.floor(Math.random() * (max - min + 1) + min)
+    }
+    //A + B+C == 150
+    function computedOne() {
+      while (true) {
+        let a = random(41, 60);
+        let b = random(21, 80);
+        let sum = 150;
+        let c = sum - (a + b);
+        if (c > 30 && c < 70) {
+          return [a, b, c]
+        }
+      }
+    }
+    //A + B == 100
+    function computedTwo() {
+      let a = random(41, 60);
+      let sum = 100;
+      let c = sum - a;
+      if (c > 20 && c < 80) {
+        return [a, c]
+      }
+    }
+    console.log(computedOne())
+    console.log(computedTwo())
+  </script>
+</body>
+
+</html>

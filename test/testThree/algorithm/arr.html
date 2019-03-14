@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+
+		let obj=[
+		{year:2017,list:[{name:'北京',val:1},{name:'上海',val:2}]},
+		{year:2018,list:[{name:'上海',val:5},{name:'北京',val:6}]}]
+		let xData=[],seriesData=[];
+		let temp= {};
+		let vlArr = [];
+		obj.map((s,i)=>{
+			xData.push(s.year)
+			s.list.map((d,j)=>{
+				if(i==0){
+					seriesData.push({name:d.name,value:[d.val]})
+				}else{
+					seriesData.map((item,t)=>{
+						if(d.name==item.name){
+						item.value.push(d.val)
+					 }
+					})
+					
+				}	
+			})
+		})
+		
+		console.log(seriesData)
+
+		let datas=[
+			{name:'beijing',vlaue:1,year:2017},
+			{name:'beijing',vlaue:2,year:2018},
+			{name:'shanggai',vlaue:3,year:2017},
+			{name:'shanggai',vlaue:4,year:2018}
+		]
+		let xDatas=[],seriesDatas=[],names='';
+		datas.map((s,i)=>{
+			if(s.name==name){
+				seriesDatas.map((d,j)=>{
+					if(d.name==s.name){
+						d.value.push(s.vlaue)
+					}
+				})	
+			}else{
+				seriesDatas.push({
+					name:s.name,
+					value:[s.vlaue]
+				})
+			}
+			name=s.name;
+		})
+		console.log(seriesDatas)
+
+		var strs = [];//字符串数组var str='';
+		for(var i=0;i<12;i++){
+		    strs.push('xx'+i);
+		}//这只是构造一组数据而已
+		for(var i=0,s;s=strs[i++];){//遍历字符串数组
+		    str+=s;
+		    if(!(i%3))str+='\n';
+		}
+		document.write(str);//放到你要放的地方去
+		
+	</script>
+</body>
+</html>

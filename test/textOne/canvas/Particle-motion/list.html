@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    body {
+      background: #000
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id='canvas'></canvas>
+  <script>
+    let canvas = document.getElementById('canvas')
+    canvas.width = screen.width;
+    canvas.height = screen.height
+    class Dot {
+      constructor(ctx, x, y, vy) {
+        this.ctx = ctx;
+        this.oy = 620;
+        this.x = x;
+        this.y = 620;
+        this.vy = vy;
+        this.r = 5;
+        this.ey = y;
+      }
+      update() {
+        if (this.y < this.ey) { this.y = this.oy }
+        this.move();
+        this.y *= this.vy;
+      }
+      move() {
+        const ctx = this.ctx;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r * Math.random(), 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${.5 * Math.random()})`;
+        ctx.fill();
+        ctx.closePath();
+      }
+    };
+    let contxt = canvas.getContext('2d')
+    let dotArr = {};
+    for (let i = 0; i < 100; i++) {
+      dotArr['dot' + i] = new Dot(contxt, 1140 * Math.random(), 100 * Math.random(), .97 + .005 * Math.random())
+    }
+    setInterval(() => {
+      contxt.clearRect(0, 0, canvas.width, canvas.height);
+      for (let n in dotArr) {
+        dotArr[n].update();
+      }
+    }, 30);
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        input {
+            width: 300px;
+            height: 30px;
+            border: 1px solid lightgray;
+            margin-top: 150px;
+            margin-left: 200px;
+            padding-left: 5px;
+        }
+
+        ul {
+            width: 307px;
+            list-style: none;
+            margin-left: 200px;
+            display: none;
+        }
+
+        li {
+            height: 30px;
+            border: 1px solid black;
+            line-height: 30px;
+            padding-left: 5px;
+            background: pink
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" id='input' placeholder="请输入">
+    <ul id="ulList">
+        <li>123</li>
+    </ul>
+    <script>
+        function callBack(res) {
+            let oul = document.getElementById('ulList');
+            let str = '';
+            let result = res.s;
+            if (result !== 0) {
+                oul.style.display = 'block';
+                result.map((s, i) => {
+                    console.log(s)
+                    str += `<li>${s}</li>`
+                })
+            }
+            oul.innerHTML = str;
+        }
+        window.onload = function () {
+            let input = document.getElementById('input');
+            let oul = document.getElementById('ulList')
+            input.onkeyup = function () {
+                if (input.value !== 0) {
+                    let value = this.value;
+                    let script = document.createElement('script');
+                    //添加地址
+                    script.src = 'http://unionsug.baidu.com/su?wd=' + value + '&p=3&cb=callBack';
+                    document.body.appendChild(script)
+                }
+                else {
+                    oul.style.display = 'none'
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

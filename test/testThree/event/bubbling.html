@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>事件委托</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        ul {
+            width: 300px;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        li {
+            flex: 1;
+            background: blue;
+            width: 90px;
+            margin-top: 20px;
+            color: #fff;
+            font-size: 16px
+        }
+
+        #btn {
+            position: absolute;
+            left: 200px;
+            top: 0
+        }
+
+        #btn1 {
+            position: absolute;
+            left: 300px;
+            top: 0
+        }
+    </style>
+</head>
+
+<body>
+    <ul id='oul'>
+        <li>列表1</li>
+        <li>列表2</li>
+        <li>列表3</li>
+    </ul>
+    <button id='btn'>添加</button>
+    <button id='btn1'>删除</button>
+    <script>
+        window.onload = function () {
+            var oBtn = document.getElementById("btn");
+            var oBtn1 = document.getElementById('btn1');
+            var oUl = document.getElementById("oul");
+            var aLi = oUl.getElementsByTagName('li');
+            var num = 4;
+
+            //事件委托，添加的子元素也有事件
+            oUl.onmouseover = function (ev) {
+                var ev = ev || window.event;
+                var target = ev.target || ev.srcElement;
+                if (target.nodeName.toLowerCase() == 'li') {
+                    target.style.background = "red";
+                }
+            };
+            oUl.onmouseout = function (ev) {
+                var ev = ev || window.event;
+                var target = ev.target || ev.srcElement;
+                if (target.nodeName.toLowerCase() == 'li') {
+                    target.style.background = "blue";
+                }
+
+            };
+
+            //添加新节点
+            oBtn.onclick = function () {
+                num++;
+                let oLi = document.createElement('li');
+                oLi.innerHTML = 111 * num;
+                oUl.appendChild(oLi);
+            };
+            //删除节点
+            oBtn1.onclick = function () {
+                let oli = oul.getElementsByTagName('li')[0];
+                oul.removeChild(oli)
+            }
+
+        }
+    </script>
+</body>
+
+</html>

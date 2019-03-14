@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		body,
+		html {
+			background: radial-gradient(200% 100% at bottom center, #f7f7b6, #e96f92, #75517d, #1b2947);
+			background: radial-gradient(220% 105% at top center, #1b2947 10%, #75517d 40%, #e96f92 65%, #f7f7b6);
+			background-attachment: fixed;
+			overflow: hidden;
+			transform-style: preserve-3d;
+			/*	子元素将保留其 3D 位置。*/
+			perspective: 500;
+		}
+
+		.layer {
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			width: inherit;
+			height: inherit;
+			animation: zoom 20s linear infinite;
+			transform-origin: 50% 50%;
+		}
+
+		@keyframes zoom {
+			0% {
+				transform: perspective(250px) translate3d(0, 0, -500px);
+			}
+			100% {
+				transform: perspective(250px) translate3d(0, 0, 500px);
+			}
+		}
+
+		.star {
+			position: absolute;
+			width: 1px;
+			height: 1px;
+			background-color: #fff;
+		}
+
+		li {
+			width: 100px;
+			height: 100px;
+			border-radius: 100%;
+			background: pink;
+		}
+	</style>
+</head>
+
+<body>
+	<script>
+		let layers = 20;
+		let starsPerLayer = 80;
+		let renderLayers = function () {
+			for (let i = 0; i < layers; i++) {
+				let newLayer = document.createElement('div');
+				newLayer.classList.add('layer');
+				newLayer.style.animationDelay = -(i + 1) + 's';
+				populateParticles(starsPerLayer, newLayer);
+				document.body.appendChild(newLayer);
+			}
+		}
+		let populateParticles = function (amt, container) {
+			for (let i = 0; i < amt; i++) {
+				let el = document.createElement('div');
+				el.classList.add('star');
+				let top = Math.floor(Math.random() * window.innerHeight);
+				let left = Math.floor(Math.random() * window.innerWidth);
+				el.style.top = top + 'px';
+				el.style.left = left + 'px';
+				container.appendChild(el);
+			}
+		}
+		renderLayers();
+		/*es6*/
+		// let li = document.getElementsByTagName("li")
+		// for (let i = 0; i < li.length; i++) {
+		// 	li[i].onclick = function () {
+		// 		console.log(i)
+		// 	}
+		// }
+		// /*es5*/
+		// let lis = document.getElementsByTagName("li")
+		// for (let i = 0; i < lis.length; i++) {
+		// 	lis[i].index = i
+		// 	lis[i].onclick = function () {
+		// 		console.log(this.index)
+		// 	}
+		// }
+	</script>
+</body>
+
+</html>

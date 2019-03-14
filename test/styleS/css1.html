@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .box {
+      width: 200px;
+      height: 200px;
+      background-color: red;
+      position: absolute;
+      top: 200px;
+      left: 500px;
+      transition: all 1s;
+      /*forwards*/
+      /*animation: simple 2s ease forwards;*/
+
+      /*无限循环*/ /*反向动画*//*延时*/
+      /*animation: simple 2s ease infinite alternate;*/
+      /*animation: simple 2s ease infinite;*/
+      /*animation: simple 2s 1s ease;*/
+      /*transform: scale(1.2) skew(0deg) rotate(0deg);*/
+      /*transform: perspective(500px) translateZ(100px);*/
+    }
+    /*@keyframes simple {*/
+      /*0% {*/
+        /*width: 200px;*/
+        /*height: 200px;*/
+        /*background-color: red;*/
+        /*top: 0px;*/
+        /*left: 0px;*/
+      /*}*/
+      /*100% {*/
+        /*width: 500px;*/
+        /*height: 400px;*/
+        /*background-color: green;*/
+        /*top: 220px;*/
+        /*left: 300px;*/
+      /*}*/
+    /*}*/
+  </style>
+</head>
+<body>
+  <div class="box">
+  </div>
+  <button class="box1">点击</button>
+  <script>
+    let box1 = document.querySelector('.box1');
+    let box = document.querySelector('.box');
+    box1.onclick = function () {
+      box.style.width = '500px';
+    }
+  </script>
+</body>
+</html>

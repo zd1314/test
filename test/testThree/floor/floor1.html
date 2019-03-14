@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <style type="text/css">
+    * {
+      padding: 0;
+      margin: 0;
+      text-decoration: none;
+    }
+
+    body,
+    html {
+      height: 100%;
+    }
+
+
+
+    ul {
+      list-style: none;
+      height: 100%;
+    }
+
+    ul li {
+      height: 100%;
+    }
+
+    ol {
+      list-style: none;
+      position: fixed;
+      top: 80px;
+      left: 50px;
+    }
+
+    ol li {
+      width: 50px;
+      height: 50px;
+      border: 1px solid #000;
+      cursor: pointer;
+      text-align: center;
+      line-height: 50px;
+    }
+
+    #toTop {
+      width: 100px;
+      height: 50px;
+      background: burlywood;
+      position: fixed;
+      bottom: 100px;
+      right: 0;
+      display: none;
+      text-align: center;
+      line-height: 50px;
+
+    }
+
+    #toTop a {
+      color: blue
+    }
+  </style>
+</head>
+
+<body>
+  <ul>
+    <li>鞋子区域</li>
+    <li>袜子区域</li>
+    <li>裤子区域</li>
+    <li>裙子区域</li>
+    <li>帽子区域</li>
+  </ul>
+  <ol>
+    <li>鞋子</li>
+    <li>袜子</li>
+    <li>裤子</li>
+    <li>裙子</li>
+    <li>帽子</li>
+  </ol>
+  <div id="toTop">
+    <a href="javascript:goToTop()">返回顶部</a>
+  </div>
+  <script type="text/javascript" src="./scroll.js"></script>
+  <script type="text/javascript">
+    //需求:点击ol中的li，屏幕滑动到对应的ul中li范围
+    //思路：还是利用window.scrollTo();利用缓动动画原理实现屏幕滑动
+    //步骤：
+    //1.获取元素
+    //2.指定ul和ol中的li的背景色，对应的li背景色相同
+    //3.获取元素并绑定事件
+    //利用缓动动画原理实现屏幕滑动
+    //用scroll事件模拟盒子距离最顶端的距离
+
+
+    //获取元素
+    var ul = document.getElementsByTagName("ul")[0];
+    var ol = document.getElementsByTagName("ol")[0]; //點擊的那個元素
+    var ulLiArr = ul.children;
+    var olLiArr = ol.children;
+    var target = 0;
+    var leader = 0;
+    var timer = null;
+
+    //指定ul和ol中li的背景色，与对应的li背景色相同
+    //设置一个数组，里面装颜色，然后指定的颜色给数组中的指定元素
+    var arrColor = ["pink", "blue", "yellow", "orange", "green"];
+    //利用for循环给两个数组的元素上色
+    for (var i = 0; i < arrColor.length; i++) {
+      //上色
+      ulLiArr[i].style.backgroundColor = arrColor[i];
+      olLiArr[i].style.backgroundColor = arrColor[i];
+
+      //属性绑定索引值
+      olLiArr[i].index = i;
+      //循环绑定，为每一个li绑定点击事件
+      olLiArr[i].onclick = function () {
+        //获取目标位置
+        //获取索引值
+        target = ulLiArr[this.index].offsetTop;
+        console.log(target)
+        //要用定时器，先清定时器
+        clearInterval(timer);
+        //利用缓动动画原理实现屏幕滑动
+        timer = setInterval(function () {
+          //获取步长
+          var step = (target - leader) / 10;
+          //二次处理步长
+          step = step > 0 ? Math.ceil(step) : Math.floor(step);
+          //屏幕滑动
+          leader = leader + step;
+          window.scrollTo(0, leader);
+          //清除定时器
+          if (Math.abs(target - leader) <= Math.abs(step)) {
+            window.scrollTo(0, target);
+            clearInterval(timer);
+          }
+        }, 25);
+      }
+
+    }
+    //用scroll事件模拟盒子距离最顶端的距离
+    window.onscroll = function () {
+      //每次屏幕滑动，把屏幕卷去的头部赋值给leader，模拟获取显示区域距离顶部的距离
+      leader = scroll().top;
+    }
+    //返回頂部
+    var div = document.getElementById("toTop");
+    document.body.onscroll = function () {
+      var heightTop = document.documentElement.scrollTop;
+      if (heightTop >= 2800)
+        div.style.display = "block";
+      else
+        div.style.display = "none";
+    }
+    function goToTop() {
+      document.documentElement.scrollTop = 0;
+    }
+
+  </script>
+</body>
+
+</html>

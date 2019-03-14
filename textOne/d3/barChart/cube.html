@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <div id='wrap'></div>
+  <script>
+    class Cube {
+      constructor() {
+        this.dom = document.getElementById('wrap')
+        this._width = 500;
+        this._height = 500;
+        this.padding = {
+          left: 30,
+          right: 30,
+          top: 30,
+          bottom: 20
+        }
+        this.xData = ['2016', '2017', '2018'];
+        this.yData = [200, 300, 500]
+      }
+      get width() {
+        return this._width;
+      }
+      get height() {
+        return this._height;
+      }
+      draw() {
+        let me = this;
+        let svg = d3.select(this.dom).append('svg')
+          .attr('width', this._width)
+          .attr('height', this._height);
+        let g = svg.append('g')
+          .attr('transform', `translate(${this._width / 4} ${this._height / 2})`)
+        g.append('path')
+          .attr('d', 'M10 10 H 50 V 150 H 10 L 10 10')
+          .attr('fill', 'blue')
+        g.append('path')
+          .attr('d', 'M230 80 A 45 45, 0, 1, 0, 275 125 L 275 80 Z')
+          .attr('fill', 'red')
+          .attr('transform', 'translate(20)')
+
+      }
+    }
+    let aa = new Cube()
+    aa.draw()
+  </script>
+</body>
+
+</html>

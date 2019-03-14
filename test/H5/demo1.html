@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>固定头部文件</title>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0
+		}
+
+		body {
+			font-family: Arial, Helvetica, sans-serif;
+			font-size: 14px;
+			color: #747d67;
+			background: #fff
+		}
+
+		a {
+			color: #528036;
+			text-decoration: none
+		}
+
+		a:hover {
+			color: #000;
+			text-decoration: none
+		}
+
+		ul {
+			list-style: none
+		}
+
+		h1 {
+			font-size: 16px
+		}
+
+		.clear {
+			clear: both
+		}
+
+		.top-head {
+			position: fixed;
+			width: 100%;
+			height: auto;
+			background: #ffc;
+			overflow-y: auto;
+			min-height: 60px;
+			line-height: 60px;
+		}
+
+		.container {
+			padding-top: 60px;
+		}
+
+		.btn {
+			width: 30px;
+			height: 80px;
+			background: red;
+			position: absolute;
+			right: 0;
+			z-index: 3;
+
+		}
+
+		.btn:hover+.wraps {
+			transform: translate(-50%, 0)
+		}
+
+		.wraps {
+			width: 100px;
+			height: 200px;
+			background: #528036;
+			position: absolute;
+			top: 150px;
+			transform: translate(-100%, 0);
+			transition: all 1s;
+			z-index: 1
+		}
+	</style>
+</head>
+
+<body>
+	<!-- 头部 -->
+	<div class="top-head">
+		我是头部文件的显示的内容，随着下边文件内容的增多，我是不会变得，我就固定在这个位置了
+	</div>
+	<div class="container">
+		<ul>
+			<li><a href="#">1啦啦啦啦啦</a></li>
+			<li><a href="#">2啦啦啦啦啦</a></li>
+			<li><a href="#">3啦啦啦啦啦</a></li>
+			<li><a href="#">4啦啦啦啦啦</a></li>
+			<li><a href="#">5啦啦啦啦啦</a></li>
+			<li><a href="#">6啦啦啦啦啦</a></li>
+			<li><a href="#">7啦啦啦啦啦</a></li>
+			<li><a href="#">8啦啦啦啦啦</a></li>
+		</ul>
+	</div>
+	<div class="btn"></div>
+	<div class="wraps"></div>
+	<script>
+
+	</script>
+</body>
+
+</html>

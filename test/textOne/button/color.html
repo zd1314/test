@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+
+<body>
+    <input type="color">
+    <button id="btn1">调用第一种</button>
+    <button id="bnt2">调用第二种</button>
+    <button id="btn3">调用第三种</button>
+    <script>
+        let btn1 = document.getElementById('btn1');
+        btn1.onclick = function () {
+            document.body.style.background = bg1()
+        };
+        let btn2 = document.getElementById('bnt2');
+        btn2.onclick = function () {
+            document.body.style.background = bg2();
+        };
+        let btn3 = document.getElementById('btn3');
+        btn3.onclick = function () {
+            document.body.style.background = bg3();
+        };
+        function bg1() {
+            return '#' + Math.floor(Math.random() * 256).toString(10);
+
+        }
+        function bg2() {
+            return '#' + Math.floor(Math.random() * 0xffffff).toString(16);
+        }
+        function bg3() {
+            let r = Math.floor(Math.random() * 256);
+            let g = Math.floor(Math.random() * 256);
+            let b = Math.floor(Math.random() * 256);
+            return `rgb(${r},${g},${b})`;
+        }
+
+        //递归平铺
+        function flattenArray(arr) {
+
+            const flattened = [].concat(...arr);
+
+            return flattened.some(item => Array.isArray(item)) ?
+
+                flattenArray(flattened) : flattened;
+        }
+
+        const arr = [11, [22, [44, 66], 33], [44, [55, 66, [77, [88]], 99]]];
+        // console.log(...arr)
+        const flatArr = flattenArray(arr);
+        console.log(flatArr)
+    </script>
+</body>
+
+</html>

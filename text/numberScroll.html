@@ -59,17 +59,17 @@
 <body>
   <div id="alert"></div>
   <ul id='oul'>
-    <li>0</li>
-    <li>0</li>
-    <li>0</li>
-    <li>0</li>
-    <li>0</li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
   </ul>
   <div>
     <button id="start">start</button>
     <button id="stop">stop</button>
   </div>
-
+  <script src="https://d3js.org/d3.v5.min.js"></script>
   <script type="text/javascript">
     window.onload = function () {
       let list = document.getElementsByTagName('li');
@@ -86,7 +86,12 @@
       function addNum() {
         let numberArry = getArrayItems(testArray, 5);
         for (let i = 0; i < numberArry.length; i++) {
-          list[i].innerHTML = numberArry[i]
+          d3.select('.txt' + i).text(numberArry[i])
+          if (numberArry[i].toString().length > 1) {
+            d3.select('.txt' + i).attr('x', 4.5)
+          } else {
+            d3.select('.txt' + i).attr('x', 12.5)
+          }
         }
       }
       /*点击开始的时候为1*/
@@ -117,29 +122,66 @@
           $("#alert").html("尚未开始新一轮抽奖，请点击start");
         }
       });
-    }
 
 
-    // 引入参考方法 js获取一组不重复的随机取数的方法
-    function getArrayItems(arr, num) {
-      let temp_array = [];
-      for (let i = 0; i < arr.length; i++) {
-        temp_array.push(arr[i]);
-      }
-      let return_array = [];
-      for (let i = 0; i < num; i++) {
-        if (temp_array.length > 0) {
-          let arrIndex = Math.floor(Math.random() * temp_array.length);//随机取出数组中的值 
-          // return_array[i] = temp_array[arrIndex];
-          return_array.push(temp_array[arrIndex])//通过temp_array[arrIndex]获取数组该位置的元素,并push到目标数组；
-          temp_array.splice(arrIndex, 1); //传一个删一个避免重复
+
+      // 引入参考方法 js获取一组不重复的随机取数的方法
+      function getArrayItems(arr, num) {
+        let temp_array = [];
+        for (let i = 0; i < arr.length; i++) {
+          temp_array.push(arr[i]);
         }
-        else {
-          break;
+        let return_array = [];
+        for (let i = 0; i < num; i++) {
+          if (temp_array.length > 0) {
+            let arrIndex = Math.floor(Math.random() * temp_array.length);//随机取出数组中的值 
+            // return_array[i] = temp_array[arrIndex];
+            return_array.push(temp_array[arrIndex])//通过temp_array[arrIndex]获取数组该位置的元素,并push到目标数组；
+            temp_array.splice(arrIndex, 1); //传一个删一个避免重复
+          }
+          else {
+            break;
+          }
         }
+        return return_array;
       }
-      return return_array;
+      //文字渐变
+      let svgDom = [];
+      for (let i = 0; i < list.length; i++) {
+        let svg = d3.select(list[i]).append('svg').attr('width', 35).attr('height', 40);
+        svgDom.push(svg)
+      }
+      let id = ['divVal1', 'divVal2', 'divVal3', 'divVal4', 'divVal5']
+      for (let i = 0; i < svgDom.length; i++) {
+        //给每个svg添加渐变色
+        let linearGradient = svgDom[i].append('linearGradient')
+          .attr('x1', 0)
+          .attr('x2', 0)
+          .attr('y1', 0)
+          .attr('y2', '100%')
+          .attr('id', id[i])
+        linearGradient.append('stop')
+          .attr('stop-color', 'aqua')
+          .attr('offset', '70%')
+        linearGradient.append('stop')
+          .attr('stop-color', '#fff')
+          .attr('offset', '30%')
+
+        //给每个svg添加文字
+        svgDom[i].append('text')
+          .text(2)
+          .attr('class', 'txt' + i)
+          .attr('text-anthor', 'middle')
+          .attr('dominant-baseline', 'middle')
+          .attr('fill', `url(#${id[i]}`)
+          .attr('x', 12.5)
+          .attr('y', 20)
+          .attr('font-size', 20)
+
+      }
     }
+    //d3文字渐变
+
   </script>
 </body>
 

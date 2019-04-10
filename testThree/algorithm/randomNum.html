@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>js获取一组不重复的随机取数的方法</title>
+</head>
+
+<body>
+
+    <script>
+        function numberRandom(arr) {
+            let temps = [];
+            let count = arr.length;
+            for (let i = 0; i < count; i++) {
+                let num = Math.floor(Math.random() * arr.length);
+                temps.push(arr[num]);
+                arr.splice(num, 1)
+            }
+            return temps;
+        }
+        numberRandom([3, 4, 51, 7, 7, 8, 2, 3, 7])
+    </script>
+</body>
+
+</html>

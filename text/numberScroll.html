@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title></title>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none
+    }
+
+    body {
+      background: black
+    }
+
+    ul {
+      width: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+      margin-left: 20px
+    }
+
+    ul li {
+      flex: 1;
+      height: 40px;
+      background-image: linear-gradient(45deg, #b100ff 20%, #00b3ff 80%);
+      text-align: center;
+      line-height: 40px;
+      border-radius: 5px;
+      color: #fff;
+      font-size: 14px;
+      margin-left: 5px
+    }
+
+    #alert {
+      margin: 20px;
+      color: #fff
+    }
+
+    #start,
+    #stop {
+      width: 60px;
+      height: 40px;
+      border-radius: 30px;
+      background-image: linear-gradient(160deg, orange 20%, #cf3700 80%);
+      margin-left: 20px;
+      outline: none;
+      box-shadow: 0 5px 5px 0 rgba(48, 131, 27, 0.5), 0 6px 20px 0 rgba(221, 69, 9, 0.7);
+      color: #fff;
+      font-size: 16px
+    }
+  </style>
+</head>
+
+<body>
+  <div id="alert"></div>
+  <ul id='oul'>
+    <li>0</li>
+    <li>0</li>
+    <li>0</li>
+    <li>0</li>
+    <li>0</li>
+  </ul>
+  <div>
+    <button id="start">start</button>
+    <button id="stop">stop</button>
+  </div>
+
+  <script type="text/javascript">
+    window.onload = function () {
+      let list = document.getElementsByTagName('li');
+      var testArray = [];
+      //取出60个数字
+      for (let i = 0; i < 60; i++) {
+        testArray.push(i);
+      }
+      let timer;
+      let result;
+      sessionStorage.setItem("status", 0);
+
+      //添加数据
+      function addNum() {
+        let numberArry = getArrayItems(testArray, 5);
+        for (let i = 0; i < numberArry.length; i++) {
+          list[i].innerHTML = numberArry[i]
+        }
+      }
+      /*点击开始的时候为1*/
+      $("#start").click(function () {
+        let me = this;
+        let status = sessionStorage.getItem("status");//获取数据
+        if (status == 0) {
+          sessionStorage.setItem("status", 1);//存入数据
+          timer = setInterval(function () {//开启定时器
+            addNum()
+          }, 50);
+          $("#alert").html("抽奖中");
+        } else {
+          $("#alert").html("本轮尚未结束，请点击stop")
+
+        }
+      });
+      /*点击结束的时候为0*/
+      $("#stop").click(function () {
+        let me = this;
+        let status = sessionStorage.getItem("status");
+        if (status == 1) {
+          sessionStorage.setItem("status", 0);
+          addNum()
+          window.clearInterval(timer);
+          $("#alert").html("本轮抽奖已经结束");
+        } else {
+          $("#alert").html("尚未开始新一轮抽奖，请点击start");
+        }
+      });
+    }
+
+
+    // 引入参考方法 js获取一组不重复的随机取数的方法
+    function getArrayItems(arr, num) {
+      let temp_array = [];
+      for (let i = 0; i < arr.length; i++) {
+        temp_array.push(arr[i]);
+      }
+      let return_array = [];
+      for (let i = 0; i < num; i++) {
+        if (temp_array.length > 0) {
+          let arrIndex = Math.floor(Math.random() * temp_array.length);//随机取出数组中的值 
+          // return_array[i] = temp_array[arrIndex];
+          return_array.push(temp_array[arrIndex])//通过temp_array[arrIndex]获取数组该位置的元素,并push到目标数组；
+          temp_array.splice(arrIndex, 1); //传一个删一个避免重复
+        }
+        else {
+          break;
+        }
+      }
+      return return_array;
+    }
+  </script>
+</body>
+
+</html>

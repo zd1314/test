@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>echarts</title>
+    <meta charset="UTF-8">
+</head>
+
+<body>
+    <div id="main" style="height: 600px;width:600px;"></div>
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/echarts.js"></script>
+    <script type="text/javascript" src="js/echarts-gl.min.js"></script>
+
+    <script type="text/javascript">
+        var chart = echarts.init(document.getElementById('main'));
+        var xdata = [];
+        var ydata = [''];
+        $.getJSON('cityCredit.json', function (obj, index) {
+            //读取json文件文件，遍历对象重新组合成data
+            var data = echarts.util.map(obj, function (item, index) {
+                return {
+                    //index值x值，2指示y值，item.value指z值。其中x值代表省的变化，z值代表信用的变化
+                    value: [index, 2, item.value],
+                    //柱状图的填充颜色
+                    itemStyle: {
+                        color: '#66D9EF'
+                    }
+                }
+
+            });
+
+            for (var i = 0; i < obj.length; i++) {
+                xdata.push(obj[i].name);//获取省名
+            }
+            initChart(xdata, data1, hours)
+        })
+
+        function initChart(xdata, ydata, citydata) {
+            option = {
+                tooltip: {
+                    type: ''
+                },
+                xAxis3D: {
+                    type: 'category',
+                    name: '',
+                    data: xdata,
+                    axisTick: {
+                        show: true
+                    },
+                },
+                yAxis3D: {
+                    type: 'category',
+                    name: '',
+                    data: ydata,
+                    axisTick: {
+                        show: false
+                    },
+                    axisLine: {
+                        lineStyle: {
+                            color: 'rgba(0,0,0,0)'
+                        }
+                    }
+                },
+                zAxis3D: {
+                    type: 'value',
+                    name: '',
+                    axisTick: {
+                        show: false
+                    },
+                },
+                grid3D: {
+                    boxWidth: 200,
+                    boxDepth: 80,
+                    zlevel: -10,
+                    axisPointer: {
+                        show: false
+                    },
+                    light: {
+                        main: {
+                            intensity: 1.2
+                        },
+                        ambient: {
+                            intensity: 0.3
+                        }
+                    }
+                },
+                series: [{
+                    type: 'bar3D',
+                    name: '',
+                    barSize: 11,
+                    data: citydata,
+                    label: {
+                        show: false,
+                        textStyle: {
+                            fontSize: 16,
+                            borderWidth: 1
+                        }
+                    },
+                    itemStyle: {
+                        opacity: 0.4
+                    },
+                    emphasis: {
+                        label: {
+                            textStyle: {
+                                fontSize: 20,
+                                color: '#900'
+                            }
+                        }
+                    }
+                }]
+            }
+            chart.setOption(option)
+        }
+
+    </script>
+</body>
+
+</html>

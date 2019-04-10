@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .panel-title {
+            display: flex;
+        }
+
+        .title-item {
+            height: 36px;
+            border-radius: 1px 2px 3px 10px;
+            border: 2px solid #0d73e8;
+            border-bottom: none;
+            background: linear-gradient(to right, rgba(2, 55, 124, .7), rgba(55, 7, 108, .8));
+            line-height: 36px;
+            box-sizing: border-box;
+            padding: 0px 5px;
+            color: #fff;
+        }
+
+        /* .title-item::after {
+            content: '';
+            width: 2px;
+            height: 30px;
+            background: #0d73e8;
+            display: block;
+            position: absolute;
+            top: 10px;
+            left: 8px
+        }
+
+        .title-item::before {
+            content: '';
+            width: 2px;
+            height: 4px;
+            background: #0d73e8;
+            display: block;
+            position: absolute;
+            top: 40px;
+            left: 9px;
+            transform: skewX(30deg);
+        } */
+
+        .panel-title span {
+            width: 0px;
+            height: 0px;
+            border-color: rgba(13, 114, 232, .3) transparent;
+            border-width: 0px 33px 36px 0px;
+            border-style: solid;
+        }
+
+        .panel-content {
+            width: 500px;
+            height: 200px;
+            background: rgba(13, 114, 232, .5);
+            position: absolute;
+            z-index: -1;
+            border-top: 2px solid;
+            border-image: linear-gradient(to right, transparent 0%, #0d73e8 50%, transparent 100%) 1;
+        }
+
+        .panel-content::after {
+            content: '';
+            width: 2px;
+            height: 200px;
+            background: linear-gradient(to bottom, transparent 0%, #0d73e8 50%, transparent 100%);
+            display: block;
+            position: absolute;
+            top: -16px
+        }
+
+        .panel-content::before {
+            content: '';
+            width: 2px;
+            height: 200px;
+            background: linear-gradient(to bottom, transparent 0%, #0d73e8 50%, transparent 100%);
+            display: block;
+            position: absolute;
+            right: 0
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="panel-title">
+            <div class="title-item">服务共享接口访问情况</div>
+            <span></span>
+        </div>
+        <div class="panel-content"></div>
+    </div>
+</body>
+
+</html>

@@ -54,3 +54,6 @@ layui��ܲ���
              let b=Math.floor(Math.random()*256);
              return "rgb("+r+','+g+','+b+")";
          }
+
+
+http://lbsyun.baidu.com/custom/ 百度地图更改样式
